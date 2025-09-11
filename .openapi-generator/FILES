@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -95,14 +94,4 @@ model_state_reason.go
 model_target.go
 model_unit.go
 response.go
-test/api_intervals_test.go
-test/api_machine_groups_test.go
-test/api_metric_groups_test.go
-test/api_oql_test.go
-test/api_product_attributes_test.go
-test/api_product_mappings_test.go
-test/api_products_test.go
-test/api_quality_test__test.go
-test/api_scrap_yield_data_test.go
-test/api_targets_test.go
 utils.go
