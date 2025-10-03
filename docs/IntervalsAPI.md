@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 
 ## V2IntervalsSetPost
 
-> V2IntervalsSetPost200Response V2IntervalsSetPost(ctx).IntervalBulkCreate(intervalBulkCreate).Execute()
+> []string V2IntervalsSetPost(ctx).IntervalBulkCreate(intervalBulkCreate).Execute()
 
 
 
@@ -373,7 +373,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `IntervalsAPI.V2IntervalsSetPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2IntervalsSetPost`: V2IntervalsSetPost200Response
+	// response from `V2IntervalsSetPost`: []string
 	fmt.Fprintf(os.Stdout, "Response from `IntervalsAPI.V2IntervalsSetPost`: %v\n", resp)
 }
 ```
@@ -393,7 +393,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2IntervalsSetPost200Response**](V2IntervalsSetPost200Response.md)
+**[]string**
 
 ### Authorization
 

@@ -50,7 +50,6 @@ docs/Target.md
 docs/TargetsAPI.md
 docs/Unit.md
 docs/V2IntervalsDeletePost200Response.md
-docs/V2IntervalsSetPost200Response.md
 docs/V2LineSearchPost400Response.md
 docs/V2LineSearchPost409Response.md
 docs/V2LineSearchPost500Response.md
@@ -61,7 +60,6 @@ git_push.sh
 go.mod
 go.sum
 model__v2_intervals_delete_post_200_response.go
-model__v2_intervals_set_post_200_response.go
 model__v2_line_search_post_400_response.go
 model__v2_line_search_post_409_response.go
 model__v2_line_search_post_500_response.go
