@@ -462,7 +462,7 @@ func (r ApiV2IntervalSetPostRequest) Interval(interval Interval) ApiV2IntervalSe
 	return r
 }
 
-func (r ApiV2IntervalSetPostRequest) Execute() (*Interval, *http.Response, error) {
+func (r ApiV2IntervalSetPostRequest) Execute() ([]Interval, *http.Response, error) {
 	return r.ApiService.V2IntervalSetPostExecute(r)
 }
 
@@ -500,13 +500,13 @@ func (a *IntervalsAPIService) V2IntervalSetPost(ctx context.Context) ApiV2Interv
 }
 
 // Execute executes the request
-//  @return Interval
-func (a *IntervalsAPIService) V2IntervalSetPostExecute(r ApiV2IntervalSetPostRequest) (*Interval, *http.Response, error) {
+//  @return []Interval
+func (a *IntervalsAPIService) V2IntervalSetPostExecute(r ApiV2IntervalSetPostRequest) ([]Interval, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Interval
+		localVarReturnValue  []Interval
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntervalsAPIService.V2IntervalSetPost")
