@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MetadataType** | **string** |  | 
+**MetadataType** | Pointer to **string** |  | [optional] [readonly] 
 **Reason** | Pointer to [**StateReason**](StateReason.md) |  | [optional] 
 **Comment** | Pointer to **string** |  | [optional] 
 **Category** | Pointer to [**StateCategory**](StateCategory.md) |  | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewStateMetadata
 
-`func NewStateMetadata(metadataType string, ) *StateMetadata`
+`func NewStateMetadata() *StateMetadata`
 
 NewStateMetadata instantiates a new StateMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -47,6 +47,11 @@ and a boolean to check if the value has been set.
 
 SetMetadataType sets MetadataType field to given value.
 
+### HasMetadataType
+
+`func (o *StateMetadata) HasMetadataType() bool`
+
+HasMetadataType returns a boolean if a field has been set.
 
 ### GetReason
 

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MetadataType** | **string** |  | 
+**MetadataType** | Pointer to **string** |  | [optional] [readonly] 
 **Run** | Pointer to [**Interval**](Interval.md) |  | [optional] 
 
 ## Methods
 
 ### NewBatchMetadata
 
-`func NewBatchMetadata(metadataType string, ) *BatchMetadata`
+`func NewBatchMetadata() *BatchMetadata`
 
 NewBatchMetadata instantiates a new BatchMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetMetadataType sets MetadataType field to given value.
 
+### HasMetadataType
+
+`func (o *BatchMetadata) HasMetadataType() bool`
+
+HasMetadataType returns a boolean if a field has been set.
 
 ### GetRun
 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MetadataType** | **string** |  | 
+**MetadataType** | Pointer to **string** |  | [optional] [readonly] 
 
 ## Methods
 
 ### NewCustomMetadata
 
-`func NewCustomMetadata(metadataType string, ) *CustomMetadata`
+`func NewCustomMetadata() *CustomMetadata`
 
 NewCustomMetadata instantiates a new CustomMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -44,6 +44,11 @@ and a boolean to check if the value has been set.
 
 SetMetadataType sets MetadataType field to given value.
 
+### HasMetadataType
+
+`func (o *CustomMetadata) HasMetadataType() bool`
+
+HasMetadataType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

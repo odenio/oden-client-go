@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MetadataType** | **string** |  | 
+**MetadataType** | Pointer to **string** |  | [optional] [readonly] 
 **Product** | Pointer to [**Product**](Product.md) |  | [optional] 
 **Target** | Pointer to [**Target**](Target.md) |  | [optional] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewRunMetadata
 
-`func NewRunMetadata(metadataType string, ) *RunMetadata`
+`func NewRunMetadata() *RunMetadata`
 
 NewRunMetadata instantiates a new RunMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,11 @@ and a boolean to check if the value has been set.
 
 SetMetadataType sets MetadataType field to given value.
 
+### HasMetadataType
+
+`func (o *RunMetadata) HasMetadataType() bool`
+
+HasMetadataType returns a boolean if a field has been set.
 
 ### GetProduct
 
