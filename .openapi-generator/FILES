@@ -15,6 +15,7 @@ api_targets.go
 client.go
 configuration.go
 docs/BatchMetadata.md
+docs/CustomMetadata.md
 docs/Factory.md
 docs/GenericError.md
 docs/Interval.md
@@ -67,6 +68,7 @@ model__v2_quality_tests_delete_post_request.go
 model__v2_scrap_yield_search_post_request.go
 model__v2_scrap_yield_set_post_request.go
 model_batch_metadata.go
+model_custom_metadata.go
 model_factory.go
 model_generic_error.go
 model_interval.go

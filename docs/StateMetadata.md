@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**MetadataType** | **string** |  | 
 **Reason** | Pointer to [**StateReason**](StateReason.md) |  | [optional] 
 **Comment** | Pointer to **string** |  | [optional] 
 **Category** | Pointer to [**StateCategory**](StateCategory.md) |  | [optional] 
@@ -12,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewStateMetadata
 
-`func NewStateMetadata() *StateMetadata`
+`func NewStateMetadata(metadataType string, ) *StateMetadata`
 
 NewStateMetadata instantiates a new StateMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +27,26 @@ will change when the set of required properties is changed
 NewStateMetadataWithDefaults instantiates a new StateMetadata object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetMetadataType
+
+`func (o *StateMetadata) GetMetadataType() string`
+
+GetMetadataType returns the MetadataType field if non-nil, zero value otherwise.
+
+### GetMetadataTypeOk
+
+`func (o *StateMetadata) GetMetadataTypeOk() (*string, bool)`
+
+GetMetadataTypeOk returns a tuple with the MetadataType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadataType
+
+`func (o *StateMetadata) SetMetadataType(v string)`
+
+SetMetadataType sets MetadataType field to given value.
+
 
 ### GetReason
 

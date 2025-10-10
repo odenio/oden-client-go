@@ -20,15 +20,22 @@ import (
 // IntervalMetadata - Metadata about this interval, such as the associated run or the state category. Will differ based on the type of interval. 
 type IntervalMetadata struct {
 	BatchMetadata *BatchMetadata
+	CustomMetadata *CustomMetadata
 	RunMetadata *RunMetadata
 	StateMetadata *StateMetadata
-	MapmapOfStringAny *map[string]interface{}
 }
 
 // BatchMetadataAsIntervalMetadata is a convenience function that returns BatchMetadata wrapped in IntervalMetadata
 func BatchMetadataAsIntervalMetadata(v *BatchMetadata) IntervalMetadata {
 	return IntervalMetadata{
 		BatchMetadata: v,
+	}
+}
+
+// CustomMetadataAsIntervalMetadata is a convenience function that returns CustomMetadata wrapped in IntervalMetadata
+func CustomMetadataAsIntervalMetadata(v *CustomMetadata) IntervalMetadata {
+	return IntervalMetadata{
+		CustomMetadata: v,
 	}
 }
 
@@ -43,13 +50,6 @@ func RunMetadataAsIntervalMetadata(v *RunMetadata) IntervalMetadata {
 func StateMetadataAsIntervalMetadata(v *StateMetadata) IntervalMetadata {
 	return IntervalMetadata{
 		StateMetadata: v,
-	}
-}
-
-// map[string]interface{}AsIntervalMetadata is a convenience function that returns map[string]interface{} wrapped in IntervalMetadata
-func MapmapOfStringAnyAsIntervalMetadata(v *map[string]interface{}) IntervalMetadata {
-	return IntervalMetadata{
-		MapmapOfStringAny: v,
 	}
 }
 
@@ -73,6 +73,23 @@ func (dst *IntervalMetadata) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.BatchMetadata = nil
+	}
+
+	// try to unmarshal data into CustomMetadata
+	err = newStrictDecoder(data).Decode(&dst.CustomMetadata)
+	if err == nil {
+		jsonCustomMetadata, _ := json.Marshal(dst.CustomMetadata)
+		if string(jsonCustomMetadata) == "{}" { // empty struct
+			dst.CustomMetadata = nil
+		} else {
+			if err = validator.Validate(dst.CustomMetadata); err != nil {
+				dst.CustomMetadata = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CustomMetadata = nil
 	}
 
 	// try to unmarshal data into RunMetadata
@@ -109,29 +126,12 @@ func (dst *IntervalMetadata) UnmarshalJSON(data []byte) error {
 		dst.StateMetadata = nil
 	}
 
-	// try to unmarshal data into MapmapOfStringAny
-	err = newStrictDecoder(data).Decode(&dst.MapmapOfStringAny)
-	if err == nil {
-		jsonMapmapOfStringAny, _ := json.Marshal(dst.MapmapOfStringAny)
-		if string(jsonMapmapOfStringAny) == "{}" { // empty struct
-			dst.MapmapOfStringAny = nil
-		} else {
-			if err = validator.Validate(dst.MapmapOfStringAny); err != nil {
-				dst.MapmapOfStringAny = nil
-			} else {
-				match++
-			}
-		}
-	} else {
-		dst.MapmapOfStringAny = nil
-	}
-
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.BatchMetadata = nil
+		dst.CustomMetadata = nil
 		dst.RunMetadata = nil
 		dst.StateMetadata = nil
-		dst.MapmapOfStringAny = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(IntervalMetadata)")
 	} else if match == 1 {
@@ -147,16 +147,16 @@ func (src IntervalMetadata) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.BatchMetadata)
 	}
 
+	if src.CustomMetadata != nil {
+		return json.Marshal(&src.CustomMetadata)
+	}
+
 	if src.RunMetadata != nil {
 		return json.Marshal(&src.RunMetadata)
 	}
 
 	if src.StateMetadata != nil {
 		return json.Marshal(&src.StateMetadata)
-	}
-
-	if src.MapmapOfStringAny != nil {
-		return json.Marshal(&src.MapmapOfStringAny)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -171,16 +171,16 @@ func (obj *IntervalMetadata) GetActualInstance() (interface{}) {
 		return obj.BatchMetadata
 	}
 
+	if obj.CustomMetadata != nil {
+		return obj.CustomMetadata
+	}
+
 	if obj.RunMetadata != nil {
 		return obj.RunMetadata
 	}
 
 	if obj.StateMetadata != nil {
 		return obj.StateMetadata
-	}
-
-	if obj.MapmapOfStringAny != nil {
-		return obj.MapmapOfStringAny
 	}
 
 	// all schemas are nil
@@ -193,16 +193,16 @@ func (obj IntervalMetadata) GetActualInstanceValue() (interface{}) {
 		return *obj.BatchMetadata
 	}
 
+	if obj.CustomMetadata != nil {
+		return *obj.CustomMetadata
+	}
+
 	if obj.RunMetadata != nil {
 		return *obj.RunMetadata
 	}
 
 	if obj.StateMetadata != nil {
 		return *obj.StateMetadata
-	}
-
-	if obj.MapmapOfStringAny != nil {
-		return *obj.MapmapOfStringAny
 	}
 
 	// all schemas are nil

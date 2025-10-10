@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**MetadataType** | **string** |  | 
 **Run** | Pointer to [**Interval**](Interval.md) |  | [optional] 
 **Product** | Pointer to [**Product**](Product.md) |  | [optional] 
 **Target** | Pointer to [**Target**](Target.md) |  | [optional] 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewIntervalMetadata
 
-`func NewIntervalMetadata() *IntervalMetadata`
+`func NewIntervalMetadata(metadataType string, ) *IntervalMetadata`
 
 NewIntervalMetadata instantiates a new IntervalMetadata object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +30,26 @@ will change when the set of required properties is changed
 NewIntervalMetadataWithDefaults instantiates a new IntervalMetadata object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetMetadataType
+
+`func (o *IntervalMetadata) GetMetadataType() string`
+
+GetMetadataType returns the MetadataType field if non-nil, zero value otherwise.
+
+### GetMetadataTypeOk
+
+`func (o *IntervalMetadata) GetMetadataTypeOk() (*string, bool)`
+
+GetMetadataTypeOk returns a tuple with the MetadataType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadataType
+
+`func (o *IntervalMetadata) SetMetadataType(v string)`
+
+SetMetadataType sets MetadataType field to given value.
+
 
 ### GetRun
 

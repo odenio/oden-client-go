@@ -16,38 +16,37 @@ import (
 	"fmt"
 )
 
-// checks if the BatchMetadata type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BatchMetadata{}
+// checks if the CustomMetadata type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CustomMetadata{}
 
-// BatchMetadata Metadata associated with a batch interval
-type BatchMetadata struct {
+// CustomMetadata Metadata associated with a custom interval type
+type CustomMetadata struct {
 	MetadataType string `json:"metadata_type"`
-	Run *Interval `json:"run,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _BatchMetadata BatchMetadata
+type _CustomMetadata CustomMetadata
 
-// NewBatchMetadata instantiates a new BatchMetadata object
+// NewCustomMetadata instantiates a new CustomMetadata object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBatchMetadata(metadataType string) *BatchMetadata {
-	this := BatchMetadata{}
+func NewCustomMetadata(metadataType string) *CustomMetadata {
+	this := CustomMetadata{}
 	this.MetadataType = metadataType
 	return &this
 }
 
-// NewBatchMetadataWithDefaults instantiates a new BatchMetadata object
+// NewCustomMetadataWithDefaults instantiates a new CustomMetadata object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBatchMetadataWithDefaults() *BatchMetadata {
-	this := BatchMetadata{}
+func NewCustomMetadataWithDefaults() *CustomMetadata {
+	this := CustomMetadata{}
 	return &this
 }
 
 // GetMetadataType returns the MetadataType field value
-func (o *BatchMetadata) GetMetadataType() string {
+func (o *CustomMetadata) GetMetadataType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -58,7 +57,7 @@ func (o *BatchMetadata) GetMetadataType() string {
 
 // GetMetadataTypeOk returns a tuple with the MetadataType field value
 // and a boolean to check if the value has been set.
-func (o *BatchMetadata) GetMetadataTypeOk() (*string, bool) {
+func (o *CustomMetadata) GetMetadataTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,43 +65,11 @@ func (o *BatchMetadata) GetMetadataTypeOk() (*string, bool) {
 }
 
 // SetMetadataType sets field value
-func (o *BatchMetadata) SetMetadataType(v string) {
+func (o *CustomMetadata) SetMetadataType(v string) {
 	o.MetadataType = v
 }
 
-// GetRun returns the Run field value if set, zero value otherwise.
-func (o *BatchMetadata) GetRun() Interval {
-	if o == nil || IsNil(o.Run) {
-		var ret Interval
-		return ret
-	}
-	return *o.Run
-}
-
-// GetRunOk returns a tuple with the Run field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BatchMetadata) GetRunOk() (*Interval, bool) {
-	if o == nil || IsNil(o.Run) {
-		return nil, false
-	}
-	return o.Run, true
-}
-
-// HasRun returns a boolean if a field has been set.
-func (o *BatchMetadata) HasRun() bool {
-	if o != nil && !IsNil(o.Run) {
-		return true
-	}
-
-	return false
-}
-
-// SetRun gets a reference to the given Interval and assigns it to the Run field.
-func (o *BatchMetadata) SetRun(v Interval) {
-	o.Run = &v
-}
-
-func (o BatchMetadata) MarshalJSON() ([]byte, error) {
+func (o CustomMetadata) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -110,12 +77,9 @@ func (o BatchMetadata) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BatchMetadata) ToMap() (map[string]interface{}, error) {
+func (o CustomMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["metadata_type"] = o.MetadataType
-	if !IsNil(o.Run) {
-		toSerialize["run"] = o.Run
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -124,7 +88,7 @@ func (o BatchMetadata) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *BatchMetadata) UnmarshalJSON(data []byte) (err error) {
+func (o *CustomMetadata) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -146,59 +110,58 @@ func (o *BatchMetadata) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varBatchMetadata := _BatchMetadata{}
+	varCustomMetadata := _CustomMetadata{}
 
-	err = json.Unmarshal(data, &varBatchMetadata)
+	err = json.Unmarshal(data, &varCustomMetadata)
 
 	if err != nil {
 		return err
 	}
 
-	*o = BatchMetadata(varBatchMetadata)
+	*o = CustomMetadata(varCustomMetadata)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "metadata_type")
-		delete(additionalProperties, "run")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableBatchMetadata struct {
-	value *BatchMetadata
+type NullableCustomMetadata struct {
+	value *CustomMetadata
 	isSet bool
 }
 
-func (v NullableBatchMetadata) Get() *BatchMetadata {
+func (v NullableCustomMetadata) Get() *CustomMetadata {
 	return v.value
 }
 
-func (v *NullableBatchMetadata) Set(val *BatchMetadata) {
+func (v *NullableCustomMetadata) Set(val *CustomMetadata) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBatchMetadata) IsSet() bool {
+func (v NullableCustomMetadata) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBatchMetadata) Unset() {
+func (v *NullableCustomMetadata) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBatchMetadata(val *BatchMetadata) *NullableBatchMetadata {
-	return &NullableBatchMetadata{value: val, isSet: true}
+func NewNullableCustomMetadata(val *CustomMetadata) *NullableCustomMetadata {
+	return &NullableCustomMetadata{value: val, isSet: true}
 }
 
-func (v NullableBatchMetadata) MarshalJSON() ([]byte, error) {
+func (v NullableCustomMetadata) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBatchMetadata) UnmarshalJSON(src []byte) error {
+func (v *NullableCustomMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
