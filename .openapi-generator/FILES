@@ -21,6 +21,7 @@ docs/GenericError.md
 docs/Interval.md
 docs/IntervalBulkCreate.md
 docs/IntervalBulkDelete.md
+docs/IntervalBulkUpdate.md
 docs/IntervalMetadata.md
 docs/IntervalType.md
 docs/IntervalsAPI.md
@@ -51,6 +52,8 @@ docs/Target.md
 docs/TargetsAPI.md
 docs/Unit.md
 docs/V2IntervalsDeletePost200Response.md
+docs/V2IntervalsUpdatePost200Response.md
+docs/V2IntervalsUpdatePost200ResponseFailedIntervalsInner.md
 docs/V2LineSearchPost400Response.md
 docs/V2LineSearchPost409Response.md
 docs/V2LineSearchPost500Response.md
@@ -61,6 +64,8 @@ git_push.sh
 go.mod
 go.sum
 model__v2_intervals_delete_post_200_response.go
+model__v2_intervals_update_post_200_response.go
+model__v2_intervals_update_post_200_response_failed_intervals_inner.go
 model__v2_line_search_post_400_response.go
 model__v2_line_search_post_409_response.go
 model__v2_line_search_post_500_response.go
@@ -74,6 +79,7 @@ model_generic_error.go
 model_interval.go
 model_interval_bulk_create.go
 model_interval_bulk_delete.go
+model_interval_bulk_update.go
 model_interval_metadata.go
 model_interval_type.go
 model_line.go

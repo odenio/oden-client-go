@@ -176,8 +176,10 @@ Class | Method | HTTP request | Description
 *IntervalsAPI* | [**V2IntervalSearchPost**](docs/IntervalsAPI.md#v2intervalsearchpost) | **Post** /v2/interval/search | 
 *IntervalsAPI* | [**V2IntervalSetPost**](docs/IntervalsAPI.md#v2intervalsetpost) | **Post** /v2/interval/set | 
 *IntervalsAPI* | [**V2IntervalTypeSearchPost**](docs/IntervalsAPI.md#v2intervaltypesearchpost) | **Post** /v2/interval_type/search | 
+*IntervalsAPI* | [**V2IntervalUpdatePost**](docs/IntervalsAPI.md#v2intervalupdatepost) | **Post** /v2/interval/update | 
 *IntervalsAPI* | [**V2IntervalsDeletePost**](docs/IntervalsAPI.md#v2intervalsdeletepost) | **Post** /v2/intervals/delete | 
 *IntervalsAPI* | [**V2IntervalsSetPost**](docs/IntervalsAPI.md#v2intervalssetpost) | **Post** /v2/intervals/set | 
+*IntervalsAPI* | [**V2IntervalsUpdatePost**](docs/IntervalsAPI.md#v2intervalsupdatepost) | **Post** /v2/intervals/update | 
 *MachineGroupsAPI* | [**V2FactorySearchPost**](docs/MachineGroupsAPI.md#v2factorysearchpost) | **Post** /v2/factory/search | 
 *MachineGroupsAPI* | [**V2LineSearchPost**](docs/MachineGroupsAPI.md#v2linesearchpost) | **Post** /v2/line/search | 
 *MetricGroupsAPI* | [**V2MetricGroupSearchPost**](docs/MetricGroupsAPI.md#v2metricgroupsearchpost) | **Post** /v2/metric_group/search | 
@@ -210,6 +212,7 @@ Class | Method | HTTP request | Description
  - [Interval](docs/Interval.md)
  - [IntervalBulkCreate](docs/IntervalBulkCreate.md)
  - [IntervalBulkDelete](docs/IntervalBulkDelete.md)
+ - [IntervalBulkUpdate](docs/IntervalBulkUpdate.md)
  - [IntervalMetadata](docs/IntervalMetadata.md)
  - [IntervalType](docs/IntervalType.md)
  - [Line](docs/Line.md)
@@ -230,6 +233,8 @@ Class | Method | HTTP request | Description
  - [Target](docs/Target.md)
  - [Unit](docs/Unit.md)
  - [V2IntervalsDeletePost200Response](docs/V2IntervalsDeletePost200Response.md)
+ - [V2IntervalsUpdatePost200Response](docs/V2IntervalsUpdatePost200Response.md)
+ - [V2IntervalsUpdatePost200ResponseFailedIntervalsInner](docs/V2IntervalsUpdatePost200ResponseFailedIntervalsInner.md)
  - [V2LineSearchPost400Response](docs/V2LineSearchPost400Response.md)
  - [V2LineSearchPost409Response](docs/V2LineSearchPost409Response.md)
  - [V2LineSearchPost500Response](docs/V2LineSearchPost500Response.md)

@@ -8,8 +8,10 @@ Method | HTTP request | Description
 [**V2IntervalSearchPost**](IntervalsAPI.md#V2IntervalSearchPost) | **Post** /v2/interval/search | 
 [**V2IntervalSetPost**](IntervalsAPI.md#V2IntervalSetPost) | **Post** /v2/interval/set | 
 [**V2IntervalTypeSearchPost**](IntervalsAPI.md#V2IntervalTypeSearchPost) | **Post** /v2/interval_type/search | 
+[**V2IntervalUpdatePost**](IntervalsAPI.md#V2IntervalUpdatePost) | **Post** /v2/interval/update | 
 [**V2IntervalsDeletePost**](IntervalsAPI.md#V2IntervalsDeletePost) | **Post** /v2/intervals/delete | 
 [**V2IntervalsSetPost**](IntervalsAPI.md#V2IntervalsSetPost) | **Post** /v2/intervals/set | 
+[**V2IntervalsUpdatePost**](IntervalsAPI.md#V2IntervalsUpdatePost) | **Post** /v2/intervals/update | 
 
 
 
@@ -277,6 +279,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## V2IntervalUpdatePost
+
+> []Interval V2IntervalUpdatePost(ctx).Interval(interval).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/odenio/oden-client-go"
+)
+
+func main() {
+	interval := *openapiclient.NewInterval(*openapiclient.NewIntervalType(), *openapiclient.NewLine()) // Interval | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntervalsAPI.V2IntervalUpdatePost(context.Background()).Interval(interval).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntervalsAPI.V2IntervalUpdatePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V2IntervalUpdatePost`: []Interval
+	fmt.Fprintf(os.Stdout, "Response from `IntervalsAPI.V2IntervalUpdatePost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV2IntervalUpdatePostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **interval** | [**Interval**](Interval.md) |  | 
+
+### Return type
+
+[**[]Interval**](Interval.md)
+
+### Authorization
+
+[APIKeyAuth](../README.md#APIKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## V2IntervalsDeletePost
 
 > V2IntervalsDeletePost200Response V2IntervalsDeletePost(ctx).IntervalBulkDelete(intervalBulkDelete).Execute()
@@ -394,6 +462,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 **[]string**
+
+### Authorization
+
+[APIKeyAuth](../README.md#APIKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V2IntervalsUpdatePost
+
+> V2IntervalsUpdatePost200Response V2IntervalsUpdatePost(ctx).IntervalBulkUpdate(intervalBulkUpdate).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/odenio/oden-client-go"
+)
+
+func main() {
+	intervalBulkUpdate := *openapiclient.NewIntervalBulkUpdate() // IntervalBulkUpdate | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntervalsAPI.V2IntervalsUpdatePost(context.Background()).IntervalBulkUpdate(intervalBulkUpdate).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntervalsAPI.V2IntervalsUpdatePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V2IntervalsUpdatePost`: V2IntervalsUpdatePost200Response
+	fmt.Fprintf(os.Stdout, "Response from `IntervalsAPI.V2IntervalsUpdatePost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV2IntervalsUpdatePostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intervalBulkUpdate** | [**IntervalBulkUpdate**](IntervalBulkUpdate.md) |  | 
+
+### Return type
+
+[**V2IntervalsUpdatePost200Response**](V2IntervalsUpdatePost200Response.md)
 
 ### Authorization
 
