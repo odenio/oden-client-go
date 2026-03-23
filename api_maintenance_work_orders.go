@@ -20,72 +20,64 @@ import (
 )
 
 
-// MachineGroupsAPIService MachineGroupsAPI service
-type MachineGroupsAPIService service
+// MaintenanceWorkOrdersAPIService MaintenanceWorkOrdersAPI service
+type MaintenanceWorkOrdersAPIService service
 
-type ApiV2FactorySearchPostRequest struct {
+type ApiV2MaintenanceWorkOrderDeletePostRequest struct {
 	ctx context.Context
-	ApiService *MachineGroupsAPIService
-	factory *Factory
+	ApiService *MaintenanceWorkOrdersAPIService
+	maintenanceWorkOrder *MaintenanceWorkOrder
 }
 
-func (r ApiV2FactorySearchPostRequest) Factory(factory Factory) ApiV2FactorySearchPostRequest {
-	r.factory = &factory
+func (r ApiV2MaintenanceWorkOrderDeletePostRequest) MaintenanceWorkOrder(maintenanceWorkOrder MaintenanceWorkOrder) ApiV2MaintenanceWorkOrderDeletePostRequest {
+	r.maintenanceWorkOrder = &maintenanceWorkOrder
 	return r
 }
 
-func (r ApiV2FactorySearchPostRequest) Execute() ([]Factory, *http.Response, error) {
-	return r.ApiService.V2FactorySearchPostExecute(r)
+func (r ApiV2MaintenanceWorkOrderDeletePostRequest) Execute() ([]MaintenanceWorkOrder, *http.Response, error) {
+	return r.ApiService.V2MaintenanceWorkOrderDeletePostExecute(r)
 }
 
 /*
-V2FactorySearchPost Method for V2FactorySearchPost
+V2MaintenanceWorkOrderDeletePost Method for V2MaintenanceWorkOrderDeletePost
 
-Search for a specific Factory by a unique indentifier:
-- `name`
-- `match: unique` or omit
-
-OR
-
-- `id`
-- `match: unique` or omit
-
-Search for all factories:
-- `match: all`
+Delete a Maintenance Work Order by unique identifier:
+- `id` OR `external_id`
+- `match: unique` or omit (only unique is supported)
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2FactorySearchPostRequest
+ @return ApiV2MaintenanceWorkOrderDeletePostRequest
 */
-func (a *MachineGroupsAPIService) V2FactorySearchPost(ctx context.Context) ApiV2FactorySearchPostRequest {
-	return ApiV2FactorySearchPostRequest{
+func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePost(ctx context.Context) ApiV2MaintenanceWorkOrderDeletePostRequest {
+	return ApiV2MaintenanceWorkOrderDeletePostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []Factory
-func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearchPostRequest) ([]Factory, *http.Response, error) {
+//  @return []MaintenanceWorkOrder
+func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePostExecute(r ApiV2MaintenanceWorkOrderDeletePostRequest) ([]MaintenanceWorkOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Factory
+		localVarReturnValue  []MaintenanceWorkOrder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MachineGroupsAPIService.V2FactorySearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.V2MaintenanceWorkOrderDeletePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/factory/search"
+	localVarPath := localBasePath + "/v2/maintenance_work_order/delete"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.factory == nil {
-		return localVarReturnValue, nil, reportError("factory is required and must be specified")
+	if r.maintenanceWorkOrder == nil {
+		return localVarReturnValue, nil, reportError("maintenanceWorkOrder is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -106,7 +98,7 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.factory
+	localVarPostBody = r.maintenanceWorkOrder
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -143,8 +135,8 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v V2LineSearchPost400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -176,6 +168,28 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v V2LineSearchPost409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v V2LineSearchPost500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -188,28 +202,6 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 501 {
-			var v GenericError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
 			var v GenericError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -234,72 +226,62 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV2LineSearchPostRequest struct {
+type ApiV2MaintenanceWorkOrderSearchPostRequest struct {
 	ctx context.Context
-	ApiService *MachineGroupsAPIService
-	line *Line
+	ApiService *MaintenanceWorkOrdersAPIService
+	v2MaintenanceWorkOrderSearchPostRequest *V2MaintenanceWorkOrderSearchPostRequest
 }
 
-func (r ApiV2LineSearchPostRequest) Line(line Line) ApiV2LineSearchPostRequest {
-	r.line = &line
+func (r ApiV2MaintenanceWorkOrderSearchPostRequest) V2MaintenanceWorkOrderSearchPostRequest(v2MaintenanceWorkOrderSearchPostRequest V2MaintenanceWorkOrderSearchPostRequest) ApiV2MaintenanceWorkOrderSearchPostRequest {
+	r.v2MaintenanceWorkOrderSearchPostRequest = &v2MaintenanceWorkOrderSearchPostRequest
 	return r
 }
 
-func (r ApiV2LineSearchPostRequest) Execute() ([]Line, *http.Response, error) {
-	return r.ApiService.V2LineSearchPostExecute(r)
+func (r ApiV2MaintenanceWorkOrderSearchPostRequest) Execute() ([]MaintenanceWorkOrder, *http.Response, error) {
+	return r.ApiService.V2MaintenanceWorkOrderSearchPostExecute(r)
 }
 
 /*
-V2LineSearchPost Method for V2LineSearchPost
+V2MaintenanceWorkOrderSearchPost Method for V2MaintenanceWorkOrderSearchPost
 
-Search for specific Line by any Line identifier. Either:
+Search for Maintenance Work Orders by:
 - `id`
-- `match: unique` or omit
-
-OR
-- `factory`
-  - `name` or `id`
-- line `name`
-- `match: unique` or omit
-
-Search for all Lines for a given Factory:
-- `factory`
-  - `name` or `id`
-- `match: all`
+- `external_id`
+- `line_id` with required `start_time` and `end_time` filters
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2LineSearchPostRequest
+ @return ApiV2MaintenanceWorkOrderSearchPostRequest
 */
-func (a *MachineGroupsAPIService) V2LineSearchPost(ctx context.Context) ApiV2LineSearchPostRequest {
-	return ApiV2LineSearchPostRequest{
+func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPost(ctx context.Context) ApiV2MaintenanceWorkOrderSearchPostRequest {
+	return ApiV2MaintenanceWorkOrderSearchPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []Line
-func (a *MachineGroupsAPIService) V2LineSearchPostExecute(r ApiV2LineSearchPostRequest) ([]Line, *http.Response, error) {
+//  @return []MaintenanceWorkOrder
+func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecute(r ApiV2MaintenanceWorkOrderSearchPostRequest) ([]MaintenanceWorkOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Line
+		localVarReturnValue  []MaintenanceWorkOrder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MachineGroupsAPIService.V2LineSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.V2MaintenanceWorkOrderSearchPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/line/search"
+	localVarPath := localBasePath + "/v2/maintenance_work_order/search"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.line == nil {
-		return localVarReturnValue, nil, reportError("line is required and must be specified")
+	if r.v2MaintenanceWorkOrderSearchPostRequest == nil {
+		return localVarReturnValue, nil, reportError("v2MaintenanceWorkOrderSearchPostRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -320,7 +302,219 @@ func (a *MachineGroupsAPIService) V2LineSearchPostExecute(r ApiV2LineSearchPostR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.line
+	localVarPostBody = r.v2MaintenanceWorkOrderSearchPostRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v V2LineSearchPost400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v V2LineSearchPost409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v V2LineSearchPost500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV2MaintenanceWorkOrderSetPostRequest struct {
+	ctx context.Context
+	ApiService *MaintenanceWorkOrdersAPIService
+	maintenanceWorkOrder *MaintenanceWorkOrder
+}
+
+func (r ApiV2MaintenanceWorkOrderSetPostRequest) MaintenanceWorkOrder(maintenanceWorkOrder MaintenanceWorkOrder) ApiV2MaintenanceWorkOrderSetPostRequest {
+	r.maintenanceWorkOrder = &maintenanceWorkOrder
+	return r
+}
+
+func (r ApiV2MaintenanceWorkOrderSetPostRequest) Execute() (*MaintenanceWorkOrder, *http.Response, error) {
+	return r.ApiService.V2MaintenanceWorkOrderSetPostExecute(r)
+}
+
+/*
+V2MaintenanceWorkOrderSetPost Method for V2MaintenanceWorkOrderSetPost
+
+Create or update a Maintenance Work Order.
+
+To **create** a new Maintenance Work Order:
+- Include `name` and `line`, `external_id`, `started_at` (required)
+- Omit `id` field
+- include `completed_at`, `description`, `metadata`
+
+To **update** an existing Maintenance Work Order:
+- Include the `id` of the existing work order
+- Include any fields to update
+
+NOTE: Any fields not included in an update request will be left unchanged.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV2MaintenanceWorkOrderSetPostRequest
+*/
+func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPost(ctx context.Context) ApiV2MaintenanceWorkOrderSetPostRequest {
+	return ApiV2MaintenanceWorkOrderSetPostRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return MaintenanceWorkOrder
+func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPostExecute(r ApiV2MaintenanceWorkOrderSetPostRequest) (*MaintenanceWorkOrder, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *MaintenanceWorkOrder
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.V2MaintenanceWorkOrderSetPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/maintenance_work_order/set"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.maintenanceWorkOrder == nil {
+		return localVarReturnValue, nil, reportError("maintenanceWorkOrder is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.maintenanceWorkOrder
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

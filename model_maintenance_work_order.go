@@ -16,42 +16,45 @@ import (
 	"time"
 )
 
-// checks if the QualityTest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &QualityTest{}
+// checks if the MaintenanceWorkOrder type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MaintenanceWorkOrder{}
 
-// QualityTest An object representing a QA test for a line for a particular run or batch interval. 
-type QualityTest struct {
+// MaintenanceWorkOrder An object representing a maintenance work order on a line.
+type MaintenanceWorkOrder struct {
 	Id *string `json:"id,omitempty"`
-	RawData map[string]interface{} `json:"raw_data,omitempty"`
-	Timestamp *time.Time `json:"timestamp,omitempty"`
-	Interval *Interval `json:"interval,omitempty"`
-	QualitySchema *QualitySchema `json:"quality_schema,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	ExternalId *string `json:"external_id,omitempty"`
+	Line *Line `json:"line,omitempty"`
+	StartedAt *time.Time `json:"started_at,omitempty"`
+	CompletedAt *time.Time `json:"completed_at,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Match *Match `json:"match,omitempty"`
 }
 
-// NewQualityTest instantiates a new QualityTest object
+// NewMaintenanceWorkOrder instantiates a new MaintenanceWorkOrder object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQualityTest() *QualityTest {
-	this := QualityTest{}
+func NewMaintenanceWorkOrder() *MaintenanceWorkOrder {
+	this := MaintenanceWorkOrder{}
 	var match Match = UNIQUE
 	this.Match = &match
 	return &this
 }
 
-// NewQualityTestWithDefaults instantiates a new QualityTest object
+// NewMaintenanceWorkOrderWithDefaults instantiates a new MaintenanceWorkOrder object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewQualityTestWithDefaults() *QualityTest {
-	this := QualityTest{}
+func NewMaintenanceWorkOrderWithDefaults() *MaintenanceWorkOrder {
+	this := MaintenanceWorkOrder{}
 	var match Match = UNIQUE
 	this.Match = &match
 	return &this
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *QualityTest) GetId() string {
+func (o *MaintenanceWorkOrder) GetId() string {
 	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
@@ -61,7 +64,7 @@ func (o *QualityTest) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QualityTest) GetIdOk() (*string, bool) {
+func (o *MaintenanceWorkOrder) GetIdOk() (*string, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -69,7 +72,7 @@ func (o *QualityTest) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *QualityTest) HasId() bool {
+func (o *MaintenanceWorkOrder) HasId() bool {
 	if o != nil && !IsNil(o.Id) {
 		return true
 	}
@@ -78,140 +81,236 @@ func (o *QualityTest) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *QualityTest) SetId(v string) {
+func (o *MaintenanceWorkOrder) SetId(v string) {
 	o.Id = &v
 }
 
-// GetRawData returns the RawData field value if set, zero value otherwise.
-func (o *QualityTest) GetRawData() map[string]interface{} {
-	if o == nil || IsNil(o.RawData) {
-		var ret map[string]interface{}
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *MaintenanceWorkOrder) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
 		return ret
 	}
-	return o.RawData
+	return *o.Name
 }
 
-// GetRawDataOk returns a tuple with the RawData field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QualityTest) GetRawDataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.RawData) {
-		return map[string]interface{}{}, false
+func (o *MaintenanceWorkOrder) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
 	}
-	return o.RawData, true
+	return o.Name, true
 }
 
-// HasRawData returns a boolean if a field has been set.
-func (o *QualityTest) HasRawData() bool {
-	if o != nil && !IsNil(o.RawData) {
+// HasName returns a boolean if a field has been set.
+func (o *MaintenanceWorkOrder) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
 	return false
 }
 
-// SetRawData gets a reference to the given map[string]interface{} and assigns it to the RawData field.
-func (o *QualityTest) SetRawData(v map[string]interface{}) {
-	o.RawData = v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *MaintenanceWorkOrder) SetName(v string) {
+	o.Name = &v
 }
 
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
-func (o *QualityTest) GetTimestamp() time.Time {
-	if o == nil || IsNil(o.Timestamp) {
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *MaintenanceWorkOrder) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MaintenanceWorkOrder) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *MaintenanceWorkOrder) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *MaintenanceWorkOrder) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
+func (o *MaintenanceWorkOrder) GetExternalId() string {
+	if o == nil || IsNil(o.ExternalId) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalId
+}
+
+// GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MaintenanceWorkOrder) GetExternalIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalId) {
+		return nil, false
+	}
+	return o.ExternalId, true
+}
+
+// HasExternalId returns a boolean if a field has been set.
+func (o *MaintenanceWorkOrder) HasExternalId() bool {
+	if o != nil && !IsNil(o.ExternalId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
+func (o *MaintenanceWorkOrder) SetExternalId(v string) {
+	o.ExternalId = &v
+}
+
+// GetLine returns the Line field value if set, zero value otherwise.
+func (o *MaintenanceWorkOrder) GetLine() Line {
+	if o == nil || IsNil(o.Line) {
+		var ret Line
+		return ret
+	}
+	return *o.Line
+}
+
+// GetLineOk returns a tuple with the Line field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MaintenanceWorkOrder) GetLineOk() (*Line, bool) {
+	if o == nil || IsNil(o.Line) {
+		return nil, false
+	}
+	return o.Line, true
+}
+
+// HasLine returns a boolean if a field has been set.
+func (o *MaintenanceWorkOrder) HasLine() bool {
+	if o != nil && !IsNil(o.Line) {
+		return true
+	}
+
+	return false
+}
+
+// SetLine gets a reference to the given Line and assigns it to the Line field.
+func (o *MaintenanceWorkOrder) SetLine(v Line) {
+	o.Line = &v
+}
+
+// GetStartedAt returns the StartedAt field value if set, zero value otherwise.
+func (o *MaintenanceWorkOrder) GetStartedAt() time.Time {
+	if o == nil || IsNil(o.StartedAt) {
 		var ret time.Time
 		return ret
 	}
-	return *o.Timestamp
+	return *o.StartedAt
 }
 
-// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// GetStartedAtOk returns a tuple with the StartedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QualityTest) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.Timestamp) {
+func (o *MaintenanceWorkOrder) GetStartedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.StartedAt) {
 		return nil, false
 	}
-	return o.Timestamp, true
+	return o.StartedAt, true
 }
 
-// HasTimestamp returns a boolean if a field has been set.
-func (o *QualityTest) HasTimestamp() bool {
-	if o != nil && !IsNil(o.Timestamp) {
+// HasStartedAt returns a boolean if a field has been set.
+func (o *MaintenanceWorkOrder) HasStartedAt() bool {
+	if o != nil && !IsNil(o.StartedAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
-func (o *QualityTest) SetTimestamp(v time.Time) {
-	o.Timestamp = &v
+// SetStartedAt gets a reference to the given time.Time and assigns it to the StartedAt field.
+func (o *MaintenanceWorkOrder) SetStartedAt(v time.Time) {
+	o.StartedAt = &v
 }
 
-// GetInterval returns the Interval field value if set, zero value otherwise.
-func (o *QualityTest) GetInterval() Interval {
-	if o == nil || IsNil(o.Interval) {
-		var ret Interval
+// GetCompletedAt returns the CompletedAt field value if set, zero value otherwise.
+func (o *MaintenanceWorkOrder) GetCompletedAt() time.Time {
+	if o == nil || IsNil(o.CompletedAt) {
+		var ret time.Time
 		return ret
 	}
-	return *o.Interval
+	return *o.CompletedAt
 }
 
-// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
+// GetCompletedAtOk returns a tuple with the CompletedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QualityTest) GetIntervalOk() (*Interval, bool) {
-	if o == nil || IsNil(o.Interval) {
+func (o *MaintenanceWorkOrder) GetCompletedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CompletedAt) {
 		return nil, false
 	}
-	return o.Interval, true
+	return o.CompletedAt, true
 }
 
-// HasInterval returns a boolean if a field has been set.
-func (o *QualityTest) HasInterval() bool {
-	if o != nil && !IsNil(o.Interval) {
+// HasCompletedAt returns a boolean if a field has been set.
+func (o *MaintenanceWorkOrder) HasCompletedAt() bool {
+	if o != nil && !IsNil(o.CompletedAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetInterval gets a reference to the given Interval and assigns it to the Interval field.
-func (o *QualityTest) SetInterval(v Interval) {
-	o.Interval = &v
+// SetCompletedAt gets a reference to the given time.Time and assigns it to the CompletedAt field.
+func (o *MaintenanceWorkOrder) SetCompletedAt(v time.Time) {
+	o.CompletedAt = &v
 }
 
-// GetQualitySchema returns the QualitySchema field value if set, zero value otherwise.
-func (o *QualityTest) GetQualitySchema() QualitySchema {
-	if o == nil || IsNil(o.QualitySchema) {
-		var ret QualitySchema
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *MaintenanceWorkOrder) GetMetadata() map[string]interface{} {
+	if o == nil || IsNil(o.Metadata) {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.QualitySchema
+	return o.Metadata
 }
 
-// GetQualitySchemaOk returns a tuple with the QualitySchema field value if set, nil otherwise
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QualityTest) GetQualitySchemaOk() (*QualitySchema, bool) {
-	if o == nil || IsNil(o.QualitySchema) {
-		return nil, false
+func (o *MaintenanceWorkOrder) GetMetadataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Metadata) {
+		return map[string]interface{}{}, false
 	}
-	return o.QualitySchema, true
+	return o.Metadata, true
 }
 
-// HasQualitySchema returns a boolean if a field has been set.
-func (o *QualityTest) HasQualitySchema() bool {
-	if o != nil && !IsNil(o.QualitySchema) {
+// HasMetadata returns a boolean if a field has been set.
+func (o *MaintenanceWorkOrder) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
 
 	return false
 }
 
-// SetQualitySchema gets a reference to the given QualitySchema and assigns it to the QualitySchema field.
-func (o *QualityTest) SetQualitySchema(v QualitySchema) {
-	o.QualitySchema = &v
+// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
+func (o *MaintenanceWorkOrder) SetMetadata(v map[string]interface{}) {
+	o.Metadata = v
 }
 
 // GetMatch returns the Match field value if set, zero value otherwise.
-func (o *QualityTest) GetMatch() Match {
+func (o *MaintenanceWorkOrder) GetMatch() Match {
 	if o == nil || IsNil(o.Match) {
 		var ret Match
 		return ret
@@ -221,7 +320,7 @@ func (o *QualityTest) GetMatch() Match {
 
 // GetMatchOk returns a tuple with the Match field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QualityTest) GetMatchOk() (*Match, bool) {
+func (o *MaintenanceWorkOrder) GetMatchOk() (*Match, bool) {
 	if o == nil || IsNil(o.Match) {
 		return nil, false
 	}
@@ -229,7 +328,7 @@ func (o *QualityTest) GetMatchOk() (*Match, bool) {
 }
 
 // HasMatch returns a boolean if a field has been set.
-func (o *QualityTest) HasMatch() bool {
+func (o *MaintenanceWorkOrder) HasMatch() bool {
 	if o != nil && !IsNil(o.Match) {
 		return true
 	}
@@ -238,11 +337,11 @@ func (o *QualityTest) HasMatch() bool {
 }
 
 // SetMatch gets a reference to the given Match and assigns it to the Match field.
-func (o *QualityTest) SetMatch(v Match) {
+func (o *MaintenanceWorkOrder) SetMatch(v Match) {
 	o.Match = &v
 }
 
-func (o QualityTest) MarshalJSON() ([]byte, error) {
+func (o MaintenanceWorkOrder) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -250,22 +349,31 @@ func (o QualityTest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o QualityTest) ToMap() (map[string]interface{}, error) {
+func (o MaintenanceWorkOrder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.RawData) {
-		toSerialize["raw_data"] = o.RawData
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.Timestamp) {
-		toSerialize["timestamp"] = o.Timestamp
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Interval) {
-		toSerialize["interval"] = o.Interval
+	if !IsNil(o.ExternalId) {
+		toSerialize["external_id"] = o.ExternalId
 	}
-	if !IsNil(o.QualitySchema) {
-		toSerialize["quality_schema"] = o.QualitySchema
+	if !IsNil(o.Line) {
+		toSerialize["line"] = o.Line
+	}
+	if !IsNil(o.StartedAt) {
+		toSerialize["started_at"] = o.StartedAt
+	}
+	if !IsNil(o.CompletedAt) {
+		toSerialize["completed_at"] = o.CompletedAt
+	}
+	if !IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
 	}
 	if !IsNil(o.Match) {
 		toSerialize["match"] = o.Match
@@ -273,38 +381,38 @@ func (o QualityTest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableQualityTest struct {
-	value *QualityTest
+type NullableMaintenanceWorkOrder struct {
+	value *MaintenanceWorkOrder
 	isSet bool
 }
 
-func (v NullableQualityTest) Get() *QualityTest {
+func (v NullableMaintenanceWorkOrder) Get() *MaintenanceWorkOrder {
 	return v.value
 }
 
-func (v *NullableQualityTest) Set(val *QualityTest) {
+func (v *NullableMaintenanceWorkOrder) Set(val *MaintenanceWorkOrder) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableQualityTest) IsSet() bool {
+func (v NullableMaintenanceWorkOrder) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableQualityTest) Unset() {
+func (v *NullableMaintenanceWorkOrder) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableQualityTest(val *QualityTest) *NullableQualityTest {
-	return &NullableQualityTest{value: val, isSet: true}
+func NewNullableMaintenanceWorkOrder(val *MaintenanceWorkOrder) *NullableMaintenanceWorkOrder {
+	return &NullableMaintenanceWorkOrder{value: val, isSet: true}
 }
 
-func (v NullableQualityTest) MarshalJSON() ([]byte, error) {
+func (v NullableMaintenanceWorkOrder) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableQualityTest) UnmarshalJSON(src []byte) error {
+func (v *NullableMaintenanceWorkOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

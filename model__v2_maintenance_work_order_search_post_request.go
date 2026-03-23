@@ -13,36 +13,45 @@ package oden
 
 import (
 	"encoding/json"
+	"time"
 )
 
-// checks if the V2IntervalsUpdatePost200ResponseFailedIntervalsInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &V2IntervalsUpdatePost200ResponseFailedIntervalsInner{}
+// checks if the V2MaintenanceWorkOrderSearchPostRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V2MaintenanceWorkOrderSearchPostRequest{}
 
-// V2IntervalsUpdatePost200ResponseFailedIntervalsInner struct for V2IntervalsUpdatePost200ResponseFailedIntervalsInner
-type V2IntervalsUpdatePost200ResponseFailedIntervalsInner struct {
+// V2MaintenanceWorkOrderSearchPostRequest struct for V2MaintenanceWorkOrderSearchPostRequest
+type V2MaintenanceWorkOrderSearchPostRequest struct {
 	Id *string `json:"id,omitempty"`
-	Error *string `json:"error,omitempty"`
+	ExternalId *string `json:"external_id,omitempty"`
+	Line *Line `json:"line,omitempty"`
+	StartTime *time.Time `json:"start_time,omitempty"`
+	EndTime *time.Time `json:"end_time,omitempty"`
+	Match *Match `json:"match,omitempty"`
 }
 
-// NewV2IntervalsUpdatePost200ResponseFailedIntervalsInner instantiates a new V2IntervalsUpdatePost200ResponseFailedIntervalsInner object
+// NewV2MaintenanceWorkOrderSearchPostRequest instantiates a new V2MaintenanceWorkOrderSearchPostRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2IntervalsUpdatePost200ResponseFailedIntervalsInner() *V2IntervalsUpdatePost200ResponseFailedIntervalsInner {
-	this := V2IntervalsUpdatePost200ResponseFailedIntervalsInner{}
+func NewV2MaintenanceWorkOrderSearchPostRequest() *V2MaintenanceWorkOrderSearchPostRequest {
+	this := V2MaintenanceWorkOrderSearchPostRequest{}
+	var match Match = UNIQUE
+	this.Match = &match
 	return &this
 }
 
-// NewV2IntervalsUpdatePost200ResponseFailedIntervalsInnerWithDefaults instantiates a new V2IntervalsUpdatePost200ResponseFailedIntervalsInner object
+// NewV2MaintenanceWorkOrderSearchPostRequestWithDefaults instantiates a new V2MaintenanceWorkOrderSearchPostRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV2IntervalsUpdatePost200ResponseFailedIntervalsInnerWithDefaults() *V2IntervalsUpdatePost200ResponseFailedIntervalsInner {
-	this := V2IntervalsUpdatePost200ResponseFailedIntervalsInner{}
+func NewV2MaintenanceWorkOrderSearchPostRequestWithDefaults() *V2MaintenanceWorkOrderSearchPostRequest {
+	this := V2MaintenanceWorkOrderSearchPostRequest{}
+	var match Match = UNIQUE
+	this.Match = &match
 	return &this
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetId() string {
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetId() string {
 	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
@@ -52,7 +61,7 @@ func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetIdOk() (*string, bool) {
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetIdOk() (*string, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -60,7 +69,7 @@ func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetIdOk() (*strin
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) HasId() bool {
+func (o *V2MaintenanceWorkOrderSearchPostRequest) HasId() bool {
 	if o != nil && !IsNil(o.Id) {
 		return true
 	}
@@ -69,43 +78,171 @@ func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) SetId(v string) {
+func (o *V2MaintenanceWorkOrderSearchPostRequest) SetId(v string) {
 	o.Id = &v
 }
 
-// GetError returns the Error field value if set, zero value otherwise.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetError() string {
-	if o == nil || IsNil(o.Error) {
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetExternalId() string {
+	if o == nil || IsNil(o.ExternalId) {
 		var ret string
 		return ret
 	}
-	return *o.Error
+	return *o.ExternalId
 }
 
-// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetErrorOk() (*string, bool) {
-	if o == nil || IsNil(o.Error) {
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetExternalIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalId) {
 		return nil, false
 	}
-	return o.Error, true
+	return o.ExternalId, true
 }
 
-// HasError returns a boolean if a field has been set.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) HasError() bool {
-	if o != nil && !IsNil(o.Error) {
+// HasExternalId returns a boolean if a field has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) HasExternalId() bool {
+	if o != nil && !IsNil(o.ExternalId) {
 		return true
 	}
 
 	return false
 }
 
-// SetError gets a reference to the given string and assigns it to the Error field.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) SetError(v string) {
-	o.Error = &v
+// SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) SetExternalId(v string) {
+	o.ExternalId = &v
 }
 
-func (o V2IntervalsUpdatePost200ResponseFailedIntervalsInner) MarshalJSON() ([]byte, error) {
+// GetLine returns the Line field value if set, zero value otherwise.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetLine() Line {
+	if o == nil || IsNil(o.Line) {
+		var ret Line
+		return ret
+	}
+	return *o.Line
+}
+
+// GetLineOk returns a tuple with the Line field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetLineOk() (*Line, bool) {
+	if o == nil || IsNil(o.Line) {
+		return nil, false
+	}
+	return o.Line, true
+}
+
+// HasLine returns a boolean if a field has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) HasLine() bool {
+	if o != nil && !IsNil(o.Line) {
+		return true
+	}
+
+	return false
+}
+
+// SetLine gets a reference to the given Line and assigns it to the Line field.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) SetLine(v Line) {
+	o.Line = &v
+}
+
+// GetStartTime returns the StartTime field value if set, zero value otherwise.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetStartTime() time.Time {
+	if o == nil || IsNil(o.StartTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.StartTime
+}
+
+// GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetStartTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.StartTime) {
+		return nil, false
+	}
+	return o.StartTime, true
+}
+
+// HasStartTime returns a boolean if a field has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) HasStartTime() bool {
+	if o != nil && !IsNil(o.StartTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTime gets a reference to the given time.Time and assigns it to the StartTime field.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) SetStartTime(v time.Time) {
+	o.StartTime = &v
+}
+
+// GetEndTime returns the EndTime field value if set, zero value otherwise.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetEndTime() time.Time {
+	if o == nil || IsNil(o.EndTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.EndTime
+}
+
+// GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetEndTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.EndTime) {
+		return nil, false
+	}
+	return o.EndTime, true
+}
+
+// HasEndTime returns a boolean if a field has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) HasEndTime() bool {
+	if o != nil && !IsNil(o.EndTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndTime gets a reference to the given time.Time and assigns it to the EndTime field.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) SetEndTime(v time.Time) {
+	o.EndTime = &v
+}
+
+// GetMatch returns the Match field value if set, zero value otherwise.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetMatch() Match {
+	if o == nil || IsNil(o.Match) {
+		var ret Match
+		return ret
+	}
+	return *o.Match
+}
+
+// GetMatchOk returns a tuple with the Match field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) GetMatchOk() (*Match, bool) {
+	if o == nil || IsNil(o.Match) {
+		return nil, false
+	}
+	return o.Match, true
+}
+
+// HasMatch returns a boolean if a field has been set.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) HasMatch() bool {
+	if o != nil && !IsNil(o.Match) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatch gets a reference to the given Match and assigns it to the Match field.
+func (o *V2MaintenanceWorkOrderSearchPostRequest) SetMatch(v Match) {
+	o.Match = &v
+}
+
+func (o V2MaintenanceWorkOrderSearchPostRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -113,49 +250,61 @@ func (o V2IntervalsUpdatePost200ResponseFailedIntervalsInner) MarshalJSON() ([]b
 	return json.Marshal(toSerialize)
 }
 
-func (o V2IntervalsUpdatePost200ResponseFailedIntervalsInner) ToMap() (map[string]interface{}, error) {
+func (o V2MaintenanceWorkOrderSearchPostRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.Error) {
-		toSerialize["error"] = o.Error
+	if !IsNil(o.ExternalId) {
+		toSerialize["external_id"] = o.ExternalId
+	}
+	if !IsNil(o.Line) {
+		toSerialize["line"] = o.Line
+	}
+	if !IsNil(o.StartTime) {
+		toSerialize["start_time"] = o.StartTime
+	}
+	if !IsNil(o.EndTime) {
+		toSerialize["end_time"] = o.EndTime
+	}
+	if !IsNil(o.Match) {
+		toSerialize["match"] = o.Match
 	}
 	return toSerialize, nil
 }
 
-type NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner struct {
-	value *V2IntervalsUpdatePost200ResponseFailedIntervalsInner
+type NullableV2MaintenanceWorkOrderSearchPostRequest struct {
+	value *V2MaintenanceWorkOrderSearchPostRequest
 	isSet bool
 }
 
-func (v NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) Get() *V2IntervalsUpdatePost200ResponseFailedIntervalsInner {
+func (v NullableV2MaintenanceWorkOrderSearchPostRequest) Get() *V2MaintenanceWorkOrderSearchPostRequest {
 	return v.value
 }
 
-func (v *NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) Set(val *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) {
+func (v *NullableV2MaintenanceWorkOrderSearchPostRequest) Set(val *V2MaintenanceWorkOrderSearchPostRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) IsSet() bool {
+func (v NullableV2MaintenanceWorkOrderSearchPostRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) Unset() {
+func (v *NullableV2MaintenanceWorkOrderSearchPostRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner(val *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) *NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner {
-	return &NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner{value: val, isSet: true}
+func NewNullableV2MaintenanceWorkOrderSearchPostRequest(val *V2MaintenanceWorkOrderSearchPostRequest) *NullableV2MaintenanceWorkOrderSearchPostRequest {
+	return &NullableV2MaintenanceWorkOrderSearchPostRequest{value: val, isSet: true}
 }
 
-func (v NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) MarshalJSON() ([]byte, error) {
+func (v NullableV2MaintenanceWorkOrderSearchPostRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) UnmarshalJSON(src []byte) error {
+func (v *NullableV2MaintenanceWorkOrderSearchPostRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

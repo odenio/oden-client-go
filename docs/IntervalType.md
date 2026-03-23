@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
-**Factory** | Pointer to [**Factory**](Factory.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Match** | Pointer to [**Match**](Match.md) |  | [optional] [default to UNIQUE]
 
@@ -52,31 +51,6 @@ SetId sets Id field to given value.
 `func (o *IntervalType) HasId() bool`
 
 HasId returns a boolean if a field has been set.
-
-### GetFactory
-
-`func (o *IntervalType) GetFactory() Factory`
-
-GetFactory returns the Factory field if non-nil, zero value otherwise.
-
-### GetFactoryOk
-
-`func (o *IntervalType) GetFactoryOk() (*Factory, bool)`
-
-GetFactoryOk returns a tuple with the Factory field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFactory
-
-`func (o *IntervalType) SetFactory(v Factory)`
-
-SetFactory sets Factory field to given value.
-
-### HasFactory
-
-`func (o *IntervalType) HasFactory() bool`
-
-HasFactory returns a boolean if a field has been set.
 
 ### GetName
 
