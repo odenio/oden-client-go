@@ -23,23 +23,23 @@ import (
 // MetricGroupsAPIService MetricGroupsAPI service
 type MetricGroupsAPIService service
 
-type ApiV2MetricGroupSearchPostRequest struct {
+type ApiSearchMetricGroupsRequest struct {
 	ctx context.Context
 	ApiService *MetricGroupsAPIService
 	metricGroup *MetricGroup
 }
 
-func (r ApiV2MetricGroupSearchPostRequest) MetricGroup(metricGroup MetricGroup) ApiV2MetricGroupSearchPostRequest {
+func (r ApiSearchMetricGroupsRequest) MetricGroup(metricGroup MetricGroup) ApiSearchMetricGroupsRequest {
 	r.metricGroup = &metricGroup
 	return r
 }
 
-func (r ApiV2MetricGroupSearchPostRequest) Execute() ([]MetricGroup, *http.Response, error) {
-	return r.ApiService.V2MetricGroupSearchPostExecute(r)
+func (r ApiSearchMetricGroupsRequest) Execute() ([]MetricGroup, *http.Response, error) {
+	return r.ApiService.SearchMetricGroupsExecute(r)
 }
 
 /*
-V2MetricGroupSearchPost Method for V2MetricGroupSearchPost
+SearchMetricGroups Search metric groups
 
 Search for a specific Metric Group:
 
@@ -56,10 +56,10 @@ Search for all Metric Groups:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2MetricGroupSearchPostRequest
+ @return ApiSearchMetricGroupsRequest
 */
-func (a *MetricGroupsAPIService) V2MetricGroupSearchPost(ctx context.Context) ApiV2MetricGroupSearchPostRequest {
-	return ApiV2MetricGroupSearchPostRequest{
+func (a *MetricGroupsAPIService) SearchMetricGroups(ctx context.Context) ApiSearchMetricGroupsRequest {
+	return ApiSearchMetricGroupsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -67,7 +67,7 @@ func (a *MetricGroupsAPIService) V2MetricGroupSearchPost(ctx context.Context) Ap
 
 // Execute executes the request
 //  @return []MetricGroup
-func (a *MetricGroupsAPIService) V2MetricGroupSearchPostExecute(r ApiV2MetricGroupSearchPostRequest) ([]MetricGroup, *http.Response, error) {
+func (a *MetricGroupsAPIService) SearchMetricGroupsExecute(r ApiSearchMetricGroupsRequest) ([]MetricGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -75,7 +75,7 @@ func (a *MetricGroupsAPIService) V2MetricGroupSearchPostExecute(r ApiV2MetricGro
 		localVarReturnValue  []MetricGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricGroupsAPIService.V2MetricGroupSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricGroupsAPIService.SearchMetricGroups")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -145,7 +145,7 @@ func (a *MetricGroupsAPIService) V2MetricGroupSearchPostExecute(r ApiV2MetricGro
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -178,7 +178,7 @@ func (a *MetricGroupsAPIService) V2MetricGroupSearchPostExecute(r ApiV2MetricGro
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -200,7 +200,7 @@ func (a *MetricGroupsAPIService) V2MetricGroupSearchPostExecute(r ApiV2MetricGro
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

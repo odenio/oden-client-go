@@ -23,23 +23,23 @@ import (
 // ProductAttributesAPIService ProductAttributesAPI service
 type ProductAttributesAPIService service
 
-type ApiV2ProductAttributeSearchPostRequest struct {
+type ApiSearchProductAttributesRequest struct {
 	ctx context.Context
 	ApiService *ProductAttributesAPIService
 	productAttribute *ProductAttribute
 }
 
-func (r ApiV2ProductAttributeSearchPostRequest) ProductAttribute(productAttribute ProductAttribute) ApiV2ProductAttributeSearchPostRequest {
+func (r ApiSearchProductAttributesRequest) ProductAttribute(productAttribute ProductAttribute) ApiSearchProductAttributesRequest {
 	r.productAttribute = &productAttribute
 	return r
 }
 
-func (r ApiV2ProductAttributeSearchPostRequest) Execute() ([]ProductAttribute, *http.Response, error) {
-	return r.ApiService.V2ProductAttributeSearchPostExecute(r)
+func (r ApiSearchProductAttributesRequest) Execute() ([]ProductAttribute, *http.Response, error) {
+	return r.ApiService.SearchProductAttributesExecute(r)
 }
 
 /*
-V2ProductAttributeSearchPost Method for V2ProductAttributeSearchPost
+SearchProductAttributes Search product attributes
 
 Searches for Product Attributes
 
@@ -51,10 +51,10 @@ If a product is supplied (and no ID), it will be used to search for a Product At
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ProductAttributeSearchPostRequest
+ @return ApiSearchProductAttributesRequest
 */
-func (a *ProductAttributesAPIService) V2ProductAttributeSearchPost(ctx context.Context) ApiV2ProductAttributeSearchPostRequest {
-	return ApiV2ProductAttributeSearchPostRequest{
+func (a *ProductAttributesAPIService) SearchProductAttributes(ctx context.Context) ApiSearchProductAttributesRequest {
+	return ApiSearchProductAttributesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -62,7 +62,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSearchPost(ctx context.C
 
 // Execute executes the request
 //  @return []ProductAttribute
-func (a *ProductAttributesAPIService) V2ProductAttributeSearchPostExecute(r ApiV2ProductAttributeSearchPostRequest) ([]ProductAttribute, *http.Response, error) {
+func (a *ProductAttributesAPIService) SearchProductAttributesExecute(r ApiSearchProductAttributesRequest) ([]ProductAttribute, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -70,7 +70,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSearchPostExecute(r ApiV
 		localVarReturnValue  []ProductAttribute
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductAttributesAPIService.V2ProductAttributeSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductAttributesAPIService.SearchProductAttributes")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -140,7 +140,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSearchPostExecute(r ApiV
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -162,7 +162,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSearchPostExecute(r ApiV
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -184,7 +184,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSearchPostExecute(r ApiV
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -208,23 +208,23 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSearchPostExecute(r ApiV
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV2ProductAttributeSetPostRequest struct {
+type ApiSetProductAttributeRequest struct {
 	ctx context.Context
 	ApiService *ProductAttributesAPIService
 	productAttribute *ProductAttribute
 }
 
-func (r ApiV2ProductAttributeSetPostRequest) ProductAttribute(productAttribute ProductAttribute) ApiV2ProductAttributeSetPostRequest {
+func (r ApiSetProductAttributeRequest) ProductAttribute(productAttribute ProductAttribute) ApiSetProductAttributeRequest {
 	r.productAttribute = &productAttribute
 	return r
 }
 
-func (r ApiV2ProductAttributeSetPostRequest) Execute() ([]ProductAttribute, *http.Response, error) {
-	return r.ApiService.V2ProductAttributeSetPostExecute(r)
+func (r ApiSetProductAttributeRequest) Execute() ([]ProductAttribute, *http.Response, error) {
+	return r.ApiService.SetProductAttributeExecute(r)
 }
 
 /*
-V2ProductAttributeSetPost Method for V2ProductAttributeSetPost
+SetProductAttribute Create or update a product attribute
 
 Set a Product Attribute for a Product.
 
@@ -240,10 +240,10 @@ Supplied Product must exist already.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ProductAttributeSetPostRequest
+ @return ApiSetProductAttributeRequest
 */
-func (a *ProductAttributesAPIService) V2ProductAttributeSetPost(ctx context.Context) ApiV2ProductAttributeSetPostRequest {
-	return ApiV2ProductAttributeSetPostRequest{
+func (a *ProductAttributesAPIService) SetProductAttribute(ctx context.Context) ApiSetProductAttributeRequest {
+	return ApiSetProductAttributeRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -251,7 +251,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSetPost(ctx context.Cont
 
 // Execute executes the request
 //  @return []ProductAttribute
-func (a *ProductAttributesAPIService) V2ProductAttributeSetPostExecute(r ApiV2ProductAttributeSetPostRequest) ([]ProductAttribute, *http.Response, error) {
+func (a *ProductAttributesAPIService) SetProductAttributeExecute(r ApiSetProductAttributeRequest) ([]ProductAttribute, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -259,7 +259,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSetPostExecute(r ApiV2Pr
 		localVarReturnValue  []ProductAttribute
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductAttributesAPIService.V2ProductAttributeSetPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductAttributesAPIService.SetProductAttribute")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -329,7 +329,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSetPostExecute(r ApiV2Pr
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -351,7 +351,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSetPostExecute(r ApiV2Pr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -373,7 +373,7 @@ func (a *ProductAttributesAPIService) V2ProductAttributeSetPostExecute(r ApiV2Pr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

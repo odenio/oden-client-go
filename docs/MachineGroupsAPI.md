@@ -4,16 +4,16 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2FactorySearchPost**](MachineGroupsAPI.md#V2FactorySearchPost) | **Post** /v2/factory/search | 
-[**V2LineSearchPost**](MachineGroupsAPI.md#V2LineSearchPost) | **Post** /v2/line/search | 
+[**SearchFactories**](MachineGroupsAPI.md#SearchFactories) | **Post** /v2/factory/search | Search factories
+[**SearchLines**](MachineGroupsAPI.md#SearchLines) | **Post** /v2/line/search | Search production lines
 
 
 
-## V2FactorySearchPost
+## SearchFactories
 
-> []Factory V2FactorySearchPost(ctx).Factory(factory).Execute()
+> []Factory SearchFactories(ctx).Factory(factory).Execute()
 
-
+Search factories
 
 
 
@@ -34,13 +34,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MachineGroupsAPI.V2FactorySearchPost(context.Background()).Factory(factory).Execute()
+	resp, r, err := apiClient.MachineGroupsAPI.SearchFactories(context.Background()).Factory(factory).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MachineGroupsAPI.V2FactorySearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MachineGroupsAPI.SearchFactories``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2FactorySearchPost`: []Factory
-	fmt.Fprintf(os.Stdout, "Response from `MachineGroupsAPI.V2FactorySearchPost`: %v\n", resp)
+	// response from `SearchFactories`: []Factory
+	fmt.Fprintf(os.Stdout, "Response from `MachineGroupsAPI.SearchFactories`: %v\n", resp)
 }
 ```
 
@@ -50,7 +50,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2FactorySearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchFactoriesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -75,11 +75,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2LineSearchPost
+## SearchLines
 
-> []Line V2LineSearchPost(ctx).Line(line).Execute()
+> []Line SearchLines(ctx).Line(line).Execute()
 
-
+Search production lines
 
 
 
@@ -100,13 +100,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MachineGroupsAPI.V2LineSearchPost(context.Background()).Line(line).Execute()
+	resp, r, err := apiClient.MachineGroupsAPI.SearchLines(context.Background()).Line(line).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MachineGroupsAPI.V2LineSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MachineGroupsAPI.SearchLines``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2LineSearchPost`: []Line
-	fmt.Fprintf(os.Stdout, "Response from `MachineGroupsAPI.V2LineSearchPost`: %v\n", resp)
+	// response from `SearchLines`: []Line
+	fmt.Fprintf(os.Stdout, "Response from `MachineGroupsAPI.SearchLines`: %v\n", resp)
 }
 ```
 
@@ -116,7 +116,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2LineSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchLinesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

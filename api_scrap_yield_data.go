@@ -23,46 +23,46 @@ import (
 // ScrapYieldDataAPIService ScrapYieldDataAPI service
 type ScrapYieldDataAPIService service
 
-type ApiV2ScrapYieldDeletePostRequest struct {
+type ApiDeleteScrapYieldRequest struct {
 	ctx context.Context
 	ApiService *ScrapYieldDataAPIService
-	v2ScrapYieldSearchPostRequest *V2ScrapYieldSearchPostRequest
+	searchScrapYieldRequest *SearchScrapYieldRequest
 }
 
-func (r ApiV2ScrapYieldDeletePostRequest) V2ScrapYieldSearchPostRequest(v2ScrapYieldSearchPostRequest V2ScrapYieldSearchPostRequest) ApiV2ScrapYieldDeletePostRequest {
-	r.v2ScrapYieldSearchPostRequest = &v2ScrapYieldSearchPostRequest
+func (r ApiDeleteScrapYieldRequest) SearchScrapYieldRequest(searchScrapYieldRequest SearchScrapYieldRequest) ApiDeleteScrapYieldRequest {
+	r.searchScrapYieldRequest = &searchScrapYieldRequest
 	return r
 }
 
-func (r ApiV2ScrapYieldDeletePostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2ScrapYieldDeletePostExecute(r)
+func (r ApiDeleteScrapYieldRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteScrapYieldExecute(r)
 }
 
 /*
-V2ScrapYieldDeletePost Method for V2ScrapYieldDeletePost
+DeleteScrapYield Delete a scrap/yield record
 
 Deletes Scrap Yield record by ID and line
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ScrapYieldDeletePostRequest
+ @return ApiDeleteScrapYieldRequest
 */
-func (a *ScrapYieldDataAPIService) V2ScrapYieldDeletePost(ctx context.Context) ApiV2ScrapYieldDeletePostRequest {
-	return ApiV2ScrapYieldDeletePostRequest{
+func (a *ScrapYieldDataAPIService) DeleteScrapYield(ctx context.Context) ApiDeleteScrapYieldRequest {
+	return ApiDeleteScrapYieldRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *ScrapYieldDataAPIService) V2ScrapYieldDeletePostExecute(r ApiV2ScrapYieldDeletePostRequest) (*http.Response, error) {
+func (a *ScrapYieldDataAPIService) DeleteScrapYieldExecute(r ApiDeleteScrapYieldRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScrapYieldDataAPIService.V2ScrapYieldDeletePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScrapYieldDataAPIService.DeleteScrapYield")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -72,8 +72,8 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldDeletePostExecute(r ApiV2ScrapYie
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.v2ScrapYieldSearchPostRequest == nil {
-		return nil, reportError("v2ScrapYieldSearchPostRequest is required and must be specified")
+	if r.searchScrapYieldRequest == nil {
+		return nil, reportError("searchScrapYieldRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -94,7 +94,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldDeletePostExecute(r ApiV2ScrapYie
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.v2ScrapYieldSearchPostRequest
+	localVarPostBody = r.searchScrapYieldRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -132,7 +132,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldDeletePostExecute(r ApiV2ScrapYie
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -165,7 +165,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldDeletePostExecute(r ApiV2ScrapYie
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -187,7 +187,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldDeletePostExecute(r ApiV2ScrapYie
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -213,46 +213,46 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldDeletePostExecute(r ApiV2ScrapYie
 	return localVarHTTPResponse, nil
 }
 
-type ApiV2ScrapYieldSearchPostRequest struct {
+type ApiSearchScrapYieldRequest struct {
 	ctx context.Context
 	ApiService *ScrapYieldDataAPIService
-	v2ScrapYieldSearchPostRequest *V2ScrapYieldSearchPostRequest
+	searchScrapYieldRequest *SearchScrapYieldRequest
 }
 
-func (r ApiV2ScrapYieldSearchPostRequest) V2ScrapYieldSearchPostRequest(v2ScrapYieldSearchPostRequest V2ScrapYieldSearchPostRequest) ApiV2ScrapYieldSearchPostRequest {
-	r.v2ScrapYieldSearchPostRequest = &v2ScrapYieldSearchPostRequest
+func (r ApiSearchScrapYieldRequest) SearchScrapYieldRequest(searchScrapYieldRequest SearchScrapYieldRequest) ApiSearchScrapYieldRequest {
+	r.searchScrapYieldRequest = &searchScrapYieldRequest
 	return r
 }
 
-func (r ApiV2ScrapYieldSearchPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2ScrapYieldSearchPostExecute(r)
+func (r ApiSearchScrapYieldRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SearchScrapYieldExecute(r)
 }
 
 /*
-V2ScrapYieldSearchPost Method for V2ScrapYieldSearchPost
+SearchScrapYield Search scrap/yield records
 
 Searches for scrap/yield records for a given Interval
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ScrapYieldSearchPostRequest
+ @return ApiSearchScrapYieldRequest
 */
-func (a *ScrapYieldDataAPIService) V2ScrapYieldSearchPost(ctx context.Context) ApiV2ScrapYieldSearchPostRequest {
-	return ApiV2ScrapYieldSearchPostRequest{
+func (a *ScrapYieldDataAPIService) SearchScrapYield(ctx context.Context) ApiSearchScrapYieldRequest {
+	return ApiSearchScrapYieldRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *ScrapYieldDataAPIService) V2ScrapYieldSearchPostExecute(r ApiV2ScrapYieldSearchPostRequest) (*http.Response, error) {
+func (a *ScrapYieldDataAPIService) SearchScrapYieldExecute(r ApiSearchScrapYieldRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScrapYieldDataAPIService.V2ScrapYieldSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScrapYieldDataAPIService.SearchScrapYield")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -262,8 +262,8 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSearchPostExecute(r ApiV2ScrapYie
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.v2ScrapYieldSearchPostRequest == nil {
-		return nil, reportError("v2ScrapYieldSearchPostRequest is required and must be specified")
+	if r.searchScrapYieldRequest == nil {
+		return nil, reportError("searchScrapYieldRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -284,7 +284,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSearchPostExecute(r ApiV2ScrapYie
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.v2ScrapYieldSearchPostRequest
+	localVarPostBody = r.searchScrapYieldRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -322,7 +322,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSearchPostExecute(r ApiV2ScrapYie
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -355,7 +355,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSearchPostExecute(r ApiV2ScrapYie
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -377,7 +377,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSearchPostExecute(r ApiV2ScrapYie
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -403,30 +403,30 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSearchPostExecute(r ApiV2ScrapYie
 	return localVarHTTPResponse, nil
 }
 
-type ApiV2ScrapYieldSetPostRequest struct {
+type ApiSetScrapYieldRequest struct {
 	ctx context.Context
 	ApiService *ScrapYieldDataAPIService
-	v2ScrapYieldSetPostRequest *V2ScrapYieldSetPostRequest
+	setScrapYieldRequest *SetScrapYieldRequest
 	pattern *string
 }
 
-func (r ApiV2ScrapYieldSetPostRequest) V2ScrapYieldSetPostRequest(v2ScrapYieldSetPostRequest V2ScrapYieldSetPostRequest) ApiV2ScrapYieldSetPostRequest {
-	r.v2ScrapYieldSetPostRequest = &v2ScrapYieldSetPostRequest
+func (r ApiSetScrapYieldRequest) SetScrapYieldRequest(setScrapYieldRequest SetScrapYieldRequest) ApiSetScrapYieldRequest {
+	r.setScrapYieldRequest = &setScrapYieldRequest
 	return r
 }
 
 // Optional pattern type to use for matching: - &#x60;exact&#x60; for exact match - &#x60;contains&#x60; for the string to be contained in the query - &#x60;regex&#x60; to match based on a regular expression 
-func (r ApiV2ScrapYieldSetPostRequest) Pattern(pattern string) ApiV2ScrapYieldSetPostRequest {
+func (r ApiSetScrapYieldRequest) Pattern(pattern string) ApiSetScrapYieldRequest {
 	r.pattern = &pattern
 	return r
 }
 
-func (r ApiV2ScrapYieldSetPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2ScrapYieldSetPostExecute(r)
+func (r ApiSetScrapYieldRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SetScrapYieldExecute(r)
 }
 
 /*
-V2ScrapYieldSetPost Method for V2ScrapYieldSetPost
+SetScrapYield Create or update a scrap/yield record
 
 Uploads scrap or yield raw data.
 
@@ -446,24 +446,24 @@ Notes:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ScrapYieldSetPostRequest
+ @return ApiSetScrapYieldRequest
 */
-func (a *ScrapYieldDataAPIService) V2ScrapYieldSetPost(ctx context.Context) ApiV2ScrapYieldSetPostRequest {
-	return ApiV2ScrapYieldSetPostRequest{
+func (a *ScrapYieldDataAPIService) SetScrapYield(ctx context.Context) ApiSetScrapYieldRequest {
+	return ApiSetScrapYieldRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *ScrapYieldDataAPIService) V2ScrapYieldSetPostExecute(r ApiV2ScrapYieldSetPostRequest) (*http.Response, error) {
+func (a *ScrapYieldDataAPIService) SetScrapYieldExecute(r ApiSetScrapYieldRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScrapYieldDataAPIService.V2ScrapYieldSetPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScrapYieldDataAPIService.SetScrapYield")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -473,8 +473,8 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSetPostExecute(r ApiV2ScrapYieldS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.v2ScrapYieldSetPostRequest == nil {
-		return nil, reportError("v2ScrapYieldSetPostRequest is required and must be specified")
+	if r.setScrapYieldRequest == nil {
+		return nil, reportError("setScrapYieldRequest is required and must be specified")
 	}
 
 	if r.pattern != nil {
@@ -502,7 +502,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSetPostExecute(r ApiV2ScrapYieldS
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.v2ScrapYieldSetPostRequest
+	localVarPostBody = r.setScrapYieldRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -540,7 +540,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSetPostExecute(r ApiV2ScrapYieldS
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -573,7 +573,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSetPostExecute(r ApiV2ScrapYieldS
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -595,7 +595,7 @@ func (a *ScrapYieldDataAPIService) V2ScrapYieldSetPostExecute(r ApiV2ScrapYieldS
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

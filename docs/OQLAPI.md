@@ -4,15 +4,15 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2OqlQueryPost**](OQLAPI.md#V2OqlQueryPost) | **Post** /v2/oql/query | 
+[**RunOqlQuery**](OQLAPI.md#RunOqlQuery) | **Post** /v2/oql/query | Run an OQL query
 
 
 
-## V2OqlQueryPost
+## RunOqlQuery
 
-> V2OqlQueryPost(ctx).OQLQuery(oQLQuery).Format(format).Execute()
+> RunOqlQuery(ctx).OQLQuery(oQLQuery).Format(format).Execute()
 
-
+Run an OQL query
 
 
 
@@ -34,9 +34,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.OQLAPI.V2OqlQueryPost(context.Background()).OQLQuery(oQLQuery).Format(format).Execute()
+	r, err := apiClient.OQLAPI.RunOqlQuery(context.Background()).OQLQuery(oQLQuery).Format(format).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `OQLAPI.V2OqlQueryPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `OQLAPI.RunOqlQuery``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -48,7 +48,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2OqlQueryPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRunOqlQueryRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

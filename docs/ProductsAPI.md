@@ -4,17 +4,17 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2ProductDeletePost**](ProductsAPI.md#V2ProductDeletePost) | **Post** /v2/product/delete | 
-[**V2ProductSearchPost**](ProductsAPI.md#V2ProductSearchPost) | **Post** /v2/product/search | 
-[**V2ProductSetPost**](ProductsAPI.md#V2ProductSetPost) | **Post** /v2/product/set | 
+[**DeleteProduct**](ProductsAPI.md#DeleteProduct) | **Post** /v2/product/delete | Delete a product
+[**SearchProducts**](ProductsAPI.md#SearchProducts) | **Post** /v2/product/search | Search products
+[**SetProduct**](ProductsAPI.md#SetProduct) | **Post** /v2/product/set | Create or update a product
 
 
 
-## V2ProductDeletePost
+## DeleteProduct
 
-> V2ProductDeletePost(ctx).Product(product).Execute()
+> DeleteProduct(ctx).Product(product).Execute()
 
-
+Delete a product
 
 
 
@@ -35,9 +35,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ProductsAPI.V2ProductDeletePost(context.Background()).Product(product).Execute()
+	r, err := apiClient.ProductsAPI.DeleteProduct(context.Background()).Product(product).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProductsAPI.V2ProductDeletePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ProductsAPI.DeleteProduct``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -49,7 +49,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ProductDeletePostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteProductRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -74,11 +74,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2ProductSearchPost
+## SearchProducts
 
-> []Product V2ProductSearchPost(ctx).Product(product).Execute()
+> []Product SearchProducts(ctx).Product(product).Execute()
 
-
+Search products
 
 
 
@@ -99,13 +99,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProductsAPI.V2ProductSearchPost(context.Background()).Product(product).Execute()
+	resp, r, err := apiClient.ProductsAPI.SearchProducts(context.Background()).Product(product).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProductsAPI.V2ProductSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ProductsAPI.SearchProducts``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2ProductSearchPost`: []Product
-	fmt.Fprintf(os.Stdout, "Response from `ProductsAPI.V2ProductSearchPost`: %v\n", resp)
+	// response from `SearchProducts`: []Product
+	fmt.Fprintf(os.Stdout, "Response from `ProductsAPI.SearchProducts`: %v\n", resp)
 }
 ```
 
@@ -115,7 +115,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ProductSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchProductsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -140,11 +140,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2ProductSetPost
+## SetProduct
 
-> V2ProductSetPost(ctx).Product(product).Execute()
+> SetProduct(ctx).Product(product).Execute()
 
-
+Create or update a product
 
 
 
@@ -165,9 +165,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ProductsAPI.V2ProductSetPost(context.Background()).Product(product).Execute()
+	r, err := apiClient.ProductsAPI.SetProduct(context.Background()).Product(product).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProductsAPI.V2ProductSetPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ProductsAPI.SetProduct``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -179,7 +179,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ProductSetPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetProductRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

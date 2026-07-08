@@ -23,23 +23,23 @@ import (
 // MachineGroupsAPIService MachineGroupsAPI service
 type MachineGroupsAPIService service
 
-type ApiV2FactorySearchPostRequest struct {
+type ApiSearchFactoriesRequest struct {
 	ctx context.Context
 	ApiService *MachineGroupsAPIService
 	factory *Factory
 }
 
-func (r ApiV2FactorySearchPostRequest) Factory(factory Factory) ApiV2FactorySearchPostRequest {
+func (r ApiSearchFactoriesRequest) Factory(factory Factory) ApiSearchFactoriesRequest {
 	r.factory = &factory
 	return r
 }
 
-func (r ApiV2FactorySearchPostRequest) Execute() ([]Factory, *http.Response, error) {
-	return r.ApiService.V2FactorySearchPostExecute(r)
+func (r ApiSearchFactoriesRequest) Execute() ([]Factory, *http.Response, error) {
+	return r.ApiService.SearchFactoriesExecute(r)
 }
 
 /*
-V2FactorySearchPost Method for V2FactorySearchPost
+SearchFactories Search factories
 
 Search for a specific Factory by a unique indentifier:
 - `name`
@@ -55,10 +55,10 @@ Search for all factories:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2FactorySearchPostRequest
+ @return ApiSearchFactoriesRequest
 */
-func (a *MachineGroupsAPIService) V2FactorySearchPost(ctx context.Context) ApiV2FactorySearchPostRequest {
-	return ApiV2FactorySearchPostRequest{
+func (a *MachineGroupsAPIService) SearchFactories(ctx context.Context) ApiSearchFactoriesRequest {
+	return ApiSearchFactoriesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -66,7 +66,7 @@ func (a *MachineGroupsAPIService) V2FactorySearchPost(ctx context.Context) ApiV2
 
 // Execute executes the request
 //  @return []Factory
-func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearchPostRequest) ([]Factory, *http.Response, error) {
+func (a *MachineGroupsAPIService) SearchFactoriesExecute(r ApiSearchFactoriesRequest) ([]Factory, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -74,7 +74,7 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 		localVarReturnValue  []Factory
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MachineGroupsAPIService.V2FactorySearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MachineGroupsAPIService.SearchFactories")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -144,7 +144,7 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -177,7 +177,7 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -199,7 +199,7 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -234,23 +234,23 @@ func (a *MachineGroupsAPIService) V2FactorySearchPostExecute(r ApiV2FactorySearc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV2LineSearchPostRequest struct {
+type ApiSearchLinesRequest struct {
 	ctx context.Context
 	ApiService *MachineGroupsAPIService
 	line *Line
 }
 
-func (r ApiV2LineSearchPostRequest) Line(line Line) ApiV2LineSearchPostRequest {
+func (r ApiSearchLinesRequest) Line(line Line) ApiSearchLinesRequest {
 	r.line = &line
 	return r
 }
 
-func (r ApiV2LineSearchPostRequest) Execute() ([]Line, *http.Response, error) {
-	return r.ApiService.V2LineSearchPostExecute(r)
+func (r ApiSearchLinesRequest) Execute() ([]Line, *http.Response, error) {
+	return r.ApiService.SearchLinesExecute(r)
 }
 
 /*
-V2LineSearchPost Method for V2LineSearchPost
+SearchLines Search production lines
 
 Search for specific Line by any Line identifier. Either:
 - `id`
@@ -269,10 +269,10 @@ Search for all Lines for a given Factory:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2LineSearchPostRequest
+ @return ApiSearchLinesRequest
 */
-func (a *MachineGroupsAPIService) V2LineSearchPost(ctx context.Context) ApiV2LineSearchPostRequest {
-	return ApiV2LineSearchPostRequest{
+func (a *MachineGroupsAPIService) SearchLines(ctx context.Context) ApiSearchLinesRequest {
+	return ApiSearchLinesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -280,7 +280,7 @@ func (a *MachineGroupsAPIService) V2LineSearchPost(ctx context.Context) ApiV2Lin
 
 // Execute executes the request
 //  @return []Line
-func (a *MachineGroupsAPIService) V2LineSearchPostExecute(r ApiV2LineSearchPostRequest) ([]Line, *http.Response, error) {
+func (a *MachineGroupsAPIService) SearchLinesExecute(r ApiSearchLinesRequest) ([]Line, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -288,7 +288,7 @@ func (a *MachineGroupsAPIService) V2LineSearchPostExecute(r ApiV2LineSearchPostR
 		localVarReturnValue  []Line
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MachineGroupsAPIService.V2LineSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MachineGroupsAPIService.SearchLines")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -358,7 +358,7 @@ func (a *MachineGroupsAPIService) V2LineSearchPostExecute(r ApiV2LineSearchPostR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -402,7 +402,7 @@ func (a *MachineGroupsAPIService) V2LineSearchPostExecute(r ApiV2LineSearchPostR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -413,7 +413,7 @@ func (a *MachineGroupsAPIService) V2LineSearchPostExecute(r ApiV2LineSearchPostR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

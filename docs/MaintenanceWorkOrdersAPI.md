@@ -4,17 +4,17 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2MaintenanceWorkOrderDeletePost**](MaintenanceWorkOrdersAPI.md#V2MaintenanceWorkOrderDeletePost) | **Post** /v2/maintenance_work_order/delete | 
-[**V2MaintenanceWorkOrderSearchPost**](MaintenanceWorkOrdersAPI.md#V2MaintenanceWorkOrderSearchPost) | **Post** /v2/maintenance_work_order/search | 
-[**V2MaintenanceWorkOrderSetPost**](MaintenanceWorkOrdersAPI.md#V2MaintenanceWorkOrderSetPost) | **Post** /v2/maintenance_work_order/set | 
+[**DeleteMaintenanceWorkOrder**](MaintenanceWorkOrdersAPI.md#DeleteMaintenanceWorkOrder) | **Post** /v2/maintenance_work_order/delete | Delete a maintenance work order
+[**SearchMaintenanceWorkOrders**](MaintenanceWorkOrdersAPI.md#SearchMaintenanceWorkOrders) | **Post** /v2/maintenance_work_order/search | Search maintenance work orders
+[**SetMaintenanceWorkOrder**](MaintenanceWorkOrdersAPI.md#SetMaintenanceWorkOrder) | **Post** /v2/maintenance_work_order/set | Create or update a maintenance work order
 
 
 
-## V2MaintenanceWorkOrderDeletePost
+## DeleteMaintenanceWorkOrder
 
-> []MaintenanceWorkOrder V2MaintenanceWorkOrderDeletePost(ctx).MaintenanceWorkOrder(maintenanceWorkOrder).Execute()
+> []MaintenanceWorkOrder DeleteMaintenanceWorkOrder(ctx).MaintenanceWorkOrder(maintenanceWorkOrder).Execute()
 
-
+Delete a maintenance work order
 
 
 
@@ -35,13 +35,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderDeletePost(context.Background()).MaintenanceWorkOrder(maintenanceWorkOrder).Execute()
+	resp, r, err := apiClient.MaintenanceWorkOrdersAPI.DeleteMaintenanceWorkOrder(context.Background()).MaintenanceWorkOrder(maintenanceWorkOrder).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderDeletePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWorkOrdersAPI.DeleteMaintenanceWorkOrder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2MaintenanceWorkOrderDeletePost`: []MaintenanceWorkOrder
-	fmt.Fprintf(os.Stdout, "Response from `MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderDeletePost`: %v\n", resp)
+	// response from `DeleteMaintenanceWorkOrder`: []MaintenanceWorkOrder
+	fmt.Fprintf(os.Stdout, "Response from `MaintenanceWorkOrdersAPI.DeleteMaintenanceWorkOrder`: %v\n", resp)
 }
 ```
 
@@ -51,7 +51,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2MaintenanceWorkOrderDeletePostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteMaintenanceWorkOrderRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -76,11 +76,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2MaintenanceWorkOrderSearchPost
+## SearchMaintenanceWorkOrders
 
-> []MaintenanceWorkOrder V2MaintenanceWorkOrderSearchPost(ctx).V2MaintenanceWorkOrderSearchPostRequest(v2MaintenanceWorkOrderSearchPostRequest).Execute()
+> []MaintenanceWorkOrder SearchMaintenanceWorkOrders(ctx).SearchMaintenanceWorkOrdersRequest(searchMaintenanceWorkOrdersRequest).Execute()
 
-
+Search maintenance work orders
 
 
 
@@ -97,17 +97,17 @@ import (
 )
 
 func main() {
-	v2MaintenanceWorkOrderSearchPostRequest := *openapiclient.NewV2MaintenanceWorkOrderSearchPostRequest() // V2MaintenanceWorkOrderSearchPostRequest | 
+	searchMaintenanceWorkOrdersRequest := *openapiclient.NewSearchMaintenanceWorkOrdersRequest() // SearchMaintenanceWorkOrdersRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderSearchPost(context.Background()).V2MaintenanceWorkOrderSearchPostRequest(v2MaintenanceWorkOrderSearchPostRequest).Execute()
+	resp, r, err := apiClient.MaintenanceWorkOrdersAPI.SearchMaintenanceWorkOrders(context.Background()).SearchMaintenanceWorkOrdersRequest(searchMaintenanceWorkOrdersRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWorkOrdersAPI.SearchMaintenanceWorkOrders``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2MaintenanceWorkOrderSearchPost`: []MaintenanceWorkOrder
-	fmt.Fprintf(os.Stdout, "Response from `MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderSearchPost`: %v\n", resp)
+	// response from `SearchMaintenanceWorkOrders`: []MaintenanceWorkOrder
+	fmt.Fprintf(os.Stdout, "Response from `MaintenanceWorkOrdersAPI.SearchMaintenanceWorkOrders`: %v\n", resp)
 }
 ```
 
@@ -117,12 +117,12 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2MaintenanceWorkOrderSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchMaintenanceWorkOrdersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **v2MaintenanceWorkOrderSearchPostRequest** | [**V2MaintenanceWorkOrderSearchPostRequest**](V2MaintenanceWorkOrderSearchPostRequest.md) |  | 
+ **searchMaintenanceWorkOrdersRequest** | [**SearchMaintenanceWorkOrdersRequest**](SearchMaintenanceWorkOrdersRequest.md) |  | 
 
 ### Return type
 
@@ -142,11 +142,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2MaintenanceWorkOrderSetPost
+## SetMaintenanceWorkOrder
 
-> MaintenanceWorkOrder V2MaintenanceWorkOrderSetPost(ctx).MaintenanceWorkOrder(maintenanceWorkOrder).Execute()
+> MaintenanceWorkOrder SetMaintenanceWorkOrder(ctx).MaintenanceWorkOrder(maintenanceWorkOrder).Execute()
 
-
+Create or update a maintenance work order
 
 
 
@@ -167,13 +167,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderSetPost(context.Background()).MaintenanceWorkOrder(maintenanceWorkOrder).Execute()
+	resp, r, err := apiClient.MaintenanceWorkOrdersAPI.SetMaintenanceWorkOrder(context.Background()).MaintenanceWorkOrder(maintenanceWorkOrder).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderSetPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWorkOrdersAPI.SetMaintenanceWorkOrder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2MaintenanceWorkOrderSetPost`: MaintenanceWorkOrder
-	fmt.Fprintf(os.Stdout, "Response from `MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderSetPost`: %v\n", resp)
+	// response from `SetMaintenanceWorkOrder`: MaintenanceWorkOrder
+	fmt.Fprintf(os.Stdout, "Response from `MaintenanceWorkOrdersAPI.SetMaintenanceWorkOrder`: %v\n", resp)
 }
 ```
 
@@ -183,7 +183,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2MaintenanceWorkOrderSetPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetMaintenanceWorkOrderRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

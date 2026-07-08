@@ -23,33 +23,33 @@ import (
 // TargetsAPIService TargetsAPI service
 type TargetsAPIService service
 
-type ApiV2TargetSearchPostRequest struct {
+type ApiSearchTargetsRequest struct {
 	ctx context.Context
 	ApiService *TargetsAPIService
 	target *Target
 }
 
-func (r ApiV2TargetSearchPostRequest) Target(target Target) ApiV2TargetSearchPostRequest {
+func (r ApiSearchTargetsRequest) Target(target Target) ApiSearchTargetsRequest {
 	r.target = &target
 	return r
 }
 
-func (r ApiV2TargetSearchPostRequest) Execute() ([]Target, *http.Response, error) {
-	return r.ApiService.V2TargetSearchPostExecute(r)
+func (r ApiSearchTargetsRequest) Execute() ([]Target, *http.Response, error) {
+	return r.ApiService.SearchTargetsExecute(r)
 }
 
 /*
-V2TargetSearchPost Method for V2TargetSearchPost
+SearchTargets Search metric targets
 
 Search for a Target by `line`, `metric_group`, and `product`. For each of these inputs, any of
 their unique indentifiers (as described in their `search` endpoint) may be used. See examples.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2TargetSearchPostRequest
+ @return ApiSearchTargetsRequest
 */
-func (a *TargetsAPIService) V2TargetSearchPost(ctx context.Context) ApiV2TargetSearchPostRequest {
-	return ApiV2TargetSearchPostRequest{
+func (a *TargetsAPIService) SearchTargets(ctx context.Context) ApiSearchTargetsRequest {
+	return ApiSearchTargetsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -57,7 +57,7 @@ func (a *TargetsAPIService) V2TargetSearchPost(ctx context.Context) ApiV2TargetS
 
 // Execute executes the request
 //  @return []Target
-func (a *TargetsAPIService) V2TargetSearchPostExecute(r ApiV2TargetSearchPostRequest) ([]Target, *http.Response, error) {
+func (a *TargetsAPIService) SearchTargetsExecute(r ApiSearchTargetsRequest) ([]Target, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -65,7 +65,7 @@ func (a *TargetsAPIService) V2TargetSearchPostExecute(r ApiV2TargetSearchPostReq
 		localVarReturnValue  []Target
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TargetsAPIService.V2TargetSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TargetsAPIService.SearchTargets")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -135,7 +135,7 @@ func (a *TargetsAPIService) V2TargetSearchPostExecute(r ApiV2TargetSearchPostReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -168,7 +168,7 @@ func (a *TargetsAPIService) V2TargetSearchPostExecute(r ApiV2TargetSearchPostReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -190,7 +190,7 @@ func (a *TargetsAPIService) V2TargetSearchPostExecute(r ApiV2TargetSearchPostReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -225,23 +225,23 @@ func (a *TargetsAPIService) V2TargetSearchPostExecute(r ApiV2TargetSearchPostReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV2TargetSetPostRequest struct {
+type ApiSetTargetRequest struct {
 	ctx context.Context
 	ApiService *TargetsAPIService
 	target *Target
 }
 
-func (r ApiV2TargetSetPostRequest) Target(target Target) ApiV2TargetSetPostRequest {
+func (r ApiSetTargetRequest) Target(target Target) ApiSetTargetRequest {
 	r.target = &target
 	return r
 }
 
-func (r ApiV2TargetSetPostRequest) Execute() (*Target, *http.Response, error) {
-	return r.ApiService.V2TargetSetPostExecute(r)
+func (r ApiSetTargetRequest) Execute() (*Target, *http.Response, error) {
+	return r.ApiService.SetTargetExecute(r)
 }
 
 /*
-V2TargetSetPost Method for V2TargetSetPost
+SetTarget Create or update a metric target
 
 Create or update a Target.
 
@@ -253,10 +253,10 @@ First the endpoint will search for a Target by `metric_group`, `product`, and `l
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2TargetSetPostRequest
+ @return ApiSetTargetRequest
 */
-func (a *TargetsAPIService) V2TargetSetPost(ctx context.Context) ApiV2TargetSetPostRequest {
-	return ApiV2TargetSetPostRequest{
+func (a *TargetsAPIService) SetTarget(ctx context.Context) ApiSetTargetRequest {
+	return ApiSetTargetRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -264,7 +264,7 @@ func (a *TargetsAPIService) V2TargetSetPost(ctx context.Context) ApiV2TargetSetP
 
 // Execute executes the request
 //  @return Target
-func (a *TargetsAPIService) V2TargetSetPostExecute(r ApiV2TargetSetPostRequest) (*Target, *http.Response, error) {
+func (a *TargetsAPIService) SetTargetExecute(r ApiSetTargetRequest) (*Target, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -272,7 +272,7 @@ func (a *TargetsAPIService) V2TargetSetPostExecute(r ApiV2TargetSetPostRequest) 
 		localVarReturnValue  *Target
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TargetsAPIService.V2TargetSetPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TargetsAPIService.SetTarget")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -342,7 +342,7 @@ func (a *TargetsAPIService) V2TargetSetPostExecute(r ApiV2TargetSetPostRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -375,7 +375,7 @@ func (a *TargetsAPIService) V2TargetSetPostExecute(r ApiV2TargetSetPostRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -397,7 +397,7 @@ func (a *TargetsAPIService) V2TargetSetPostExecute(r ApiV2TargetSetPostRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

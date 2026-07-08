@@ -23,30 +23,30 @@ import (
 // OQLAPIService OQLAPI service
 type OQLAPIService service
 
-type ApiV2OqlQueryPostRequest struct {
+type ApiRunOqlQueryRequest struct {
 	ctx context.Context
 	ApiService *OQLAPIService
 	oQLQuery *OQLQuery
 	format *string
 }
 
-func (r ApiV2OqlQueryPostRequest) OQLQuery(oQLQuery OQLQuery) ApiV2OqlQueryPostRequest {
+func (r ApiRunOqlQueryRequest) OQLQuery(oQLQuery OQLQuery) ApiRunOqlQueryRequest {
 	r.oQLQuery = &oQLQuery
 	return r
 }
 
 // Format of the response. Can be &#x60;json&#x60;, &#x60;jsonextended&#x60; or &#x60;csv&#x60;. If unspecified, defaults to &#x60;jsonextended&#x60;. 
-func (r ApiV2OqlQueryPostRequest) Format(format string) ApiV2OqlQueryPostRequest {
+func (r ApiRunOqlQueryRequest) Format(format string) ApiRunOqlQueryRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiV2OqlQueryPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2OqlQueryPostExecute(r)
+func (r ApiRunOqlQueryRequest) Execute() (*http.Response, error) {
+	return r.ApiService.RunOqlQueryExecute(r)
 }
 
 /*
-V2OqlQueryPost Method for V2OqlQueryPost
+RunOqlQuery Run an OQL query
 
 Run an OQL (Oden Query Language) query.
 
@@ -56,24 +56,24 @@ For reference on writing OQL queries, see:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2OqlQueryPostRequest
+ @return ApiRunOqlQueryRequest
 */
-func (a *OQLAPIService) V2OqlQueryPost(ctx context.Context) ApiV2OqlQueryPostRequest {
-	return ApiV2OqlQueryPostRequest{
+func (a *OQLAPIService) RunOqlQuery(ctx context.Context) ApiRunOqlQueryRequest {
+	return ApiRunOqlQueryRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *OQLAPIService) V2OqlQueryPostExecute(r ApiV2OqlQueryPostRequest) (*http.Response, error) {
+func (a *OQLAPIService) RunOqlQueryExecute(r ApiRunOqlQueryRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OQLAPIService.V2OqlQueryPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OQLAPIService.RunOqlQuery")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -150,7 +150,7 @@ func (a *OQLAPIService) V2OqlQueryPostExecute(r ApiV2OqlQueryPostRequest) (*http
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -194,7 +194,7 @@ func (a *OQLAPIService) V2OqlQueryPostExecute(r ApiV2OqlQueryPostRequest) (*http
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -204,7 +204,7 @@ func (a *OQLAPIService) V2OqlQueryPostExecute(r ApiV2OqlQueryPostRequest) (*http
 					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 413 {
+		if localVarHTTPResponse.StatusCode == 429 {
 			var v GenericError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -216,7 +216,7 @@ func (a *OQLAPIService) V2OqlQueryPostExecute(r ApiV2OqlQueryPostRequest) (*http
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

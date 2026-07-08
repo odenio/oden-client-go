@@ -23,59 +23,62 @@ import (
 // QualityTestAPIService QualityTestAPI service
 type QualityTestAPIService service
 
-type ApiV2QualitySchemaSearchPostRequest struct {
+type ApiBulkDeleteQualityTestsRequest struct {
 	ctx context.Context
 	ApiService *QualityTestAPIService
-	qualitySchema *QualitySchema
+	bulkDeleteQualityTestsRequest *BulkDeleteQualityTestsRequest
 }
 
-func (r ApiV2QualitySchemaSearchPostRequest) QualitySchema(qualitySchema QualitySchema) ApiV2QualitySchemaSearchPostRequest {
-	r.qualitySchema = &qualitySchema
+func (r ApiBulkDeleteQualityTestsRequest) BulkDeleteQualityTestsRequest(bulkDeleteQualityTestsRequest BulkDeleteQualityTestsRequest) ApiBulkDeleteQualityTestsRequest {
+	r.bulkDeleteQualityTestsRequest = &bulkDeleteQualityTestsRequest
 	return r
 }
 
-func (r ApiV2QualitySchemaSearchPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2QualitySchemaSearchPostExecute(r)
+func (r ApiBulkDeleteQualityTestsRequest) Execute() (*http.Response, error) {
+	return r.ApiService.BulkDeleteQualityTestsExecute(r)
 }
 
 /*
-V2QualitySchemaSearchPost Method for V2QualitySchemaSearchPost
+BulkDeleteQualityTests Delete multiple quality tests
 
-Searches for Quality Schema[s] by:
+Bulk deletes quality tests, either:
+- All quality tests on a given `line` whose `timsetamp` is between `start_time` and `end_time`
+OR
+- All quality tests whose `id` is supplied
 
-- `factory`
+It will do one or the other, with a bias for `id`'s if both are supplied.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2QualitySchemaSearchPostRequest
+ @return ApiBulkDeleteQualityTestsRequest
 */
-func (a *QualityTestAPIService) V2QualitySchemaSearchPost(ctx context.Context) ApiV2QualitySchemaSearchPostRequest {
-	return ApiV2QualitySchemaSearchPostRequest{
+func (a *QualityTestAPIService) BulkDeleteQualityTests(ctx context.Context) ApiBulkDeleteQualityTestsRequest {
+	return ApiBulkDeleteQualityTestsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *QualityTestAPIService) V2QualitySchemaSearchPostExecute(r ApiV2QualitySchemaSearchPostRequest) (*http.Response, error) {
+func (a *QualityTestAPIService) BulkDeleteQualityTestsExecute(r ApiBulkDeleteQualityTestsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.V2QualitySchemaSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.BulkDeleteQualityTests")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/quality_schema/search"
+	localVarPath := localBasePath + "/v2/quality_tests/delete"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.qualitySchema == nil {
-		return nil, reportError("qualitySchema is required and must be specified")
+	if r.bulkDeleteQualityTestsRequest == nil {
+		return nil, reportError("bulkDeleteQualityTestsRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -96,7 +99,7 @@ func (a *QualityTestAPIService) V2QualitySchemaSearchPostExecute(r ApiV2QualityS
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.qualitySchema
+	localVarPostBody = r.bulkDeleteQualityTestsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -134,7 +137,7 @@ func (a *QualityTestAPIService) V2QualitySchemaSearchPostExecute(r ApiV2QualityS
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -167,7 +170,7 @@ func (a *QualityTestAPIService) V2QualitySchemaSearchPostExecute(r ApiV2QualityS
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -189,7 +192,7 @@ func (a *QualityTestAPIService) V2QualitySchemaSearchPostExecute(r ApiV2QualityS
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -215,23 +218,23 @@ func (a *QualityTestAPIService) V2QualitySchemaSearchPostExecute(r ApiV2QualityS
 	return localVarHTTPResponse, nil
 }
 
-type ApiV2QualityTestDeletePostRequest struct {
+type ApiDeleteQualityTestRequest struct {
 	ctx context.Context
 	ApiService *QualityTestAPIService
 	qualityTest *QualityTest
 }
 
-func (r ApiV2QualityTestDeletePostRequest) QualityTest(qualityTest QualityTest) ApiV2QualityTestDeletePostRequest {
+func (r ApiDeleteQualityTestRequest) QualityTest(qualityTest QualityTest) ApiDeleteQualityTestRequest {
 	r.qualityTest = &qualityTest
 	return r
 }
 
-func (r ApiV2QualityTestDeletePostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2QualityTestDeletePostExecute(r)
+func (r ApiDeleteQualityTestRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteQualityTestExecute(r)
 }
 
 /*
-V2QualityTestDeletePost Method for V2QualityTestDeletePost
+DeleteQualityTest Delete a quality test
 
 Searches for uniqueQuality Test by:
 
@@ -245,24 +248,24 @@ OR
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2QualityTestDeletePostRequest
+ @return ApiDeleteQualityTestRequest
 */
-func (a *QualityTestAPIService) V2QualityTestDeletePost(ctx context.Context) ApiV2QualityTestDeletePostRequest {
-	return ApiV2QualityTestDeletePostRequest{
+func (a *QualityTestAPIService) DeleteQualityTest(ctx context.Context) ApiDeleteQualityTestRequest {
+	return ApiDeleteQualityTestRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *QualityTestAPIService) V2QualityTestDeletePostExecute(r ApiV2QualityTestDeletePostRequest) (*http.Response, error) {
+func (a *QualityTestAPIService) DeleteQualityTestExecute(r ApiDeleteQualityTestRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.V2QualityTestDeletePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.DeleteQualityTest")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -332,7 +335,7 @@ func (a *QualityTestAPIService) V2QualityTestDeletePostExecute(r ApiV2QualityTes
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -365,7 +368,7 @@ func (a *QualityTestAPIService) V2QualityTestDeletePostExecute(r ApiV2QualityTes
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -387,7 +390,7 @@ func (a *QualityTestAPIService) V2QualityTestDeletePostExecute(r ApiV2QualityTes
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -413,23 +416,215 @@ func (a *QualityTestAPIService) V2QualityTestDeletePostExecute(r ApiV2QualityTes
 	return localVarHTTPResponse, nil
 }
 
-type ApiV2QualityTestSearchPostRequest struct {
+type ApiSearchQualitySchemasRequest struct {
+	ctx context.Context
+	ApiService *QualityTestAPIService
+	qualitySchema *QualitySchema
+}
+
+func (r ApiSearchQualitySchemasRequest) QualitySchema(qualitySchema QualitySchema) ApiSearchQualitySchemasRequest {
+	r.qualitySchema = &qualitySchema
+	return r
+}
+
+func (r ApiSearchQualitySchemasRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SearchQualitySchemasExecute(r)
+}
+
+/*
+SearchQualitySchemas Search quality schemas for a factory
+
+Searches for Quality Schema[s] by:
+
+- `factory`
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSearchQualitySchemasRequest
+*/
+func (a *QualityTestAPIService) SearchQualitySchemas(ctx context.Context) ApiSearchQualitySchemasRequest {
+	return ApiSearchQualitySchemasRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+func (a *QualityTestAPIService) SearchQualitySchemasExecute(r ApiSearchQualitySchemasRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.SearchQualitySchemas")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/quality_schema/search"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.qualitySchema == nil {
+		return nil, reportError("qualitySchema is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.qualitySchema
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v SearchLines409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v SearchLines500Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v SearchLines400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GenericError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiSearchQualityTestsRequest struct {
 	ctx context.Context
 	ApiService *QualityTestAPIService
 	qualityTest *QualityTest
 }
 
-func (r ApiV2QualityTestSearchPostRequest) QualityTest(qualityTest QualityTest) ApiV2QualityTestSearchPostRequest {
+func (r ApiSearchQualityTestsRequest) QualityTest(qualityTest QualityTest) ApiSearchQualityTestsRequest {
 	r.qualityTest = &qualityTest
 	return r
 }
 
-func (r ApiV2QualityTestSearchPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2QualityTestSearchPostExecute(r)
+func (r ApiSearchQualityTestsRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SearchQualityTestsExecute(r)
 }
 
 /*
-V2QualityTestSearchPost Method for V2QualityTestSearchPost
+SearchQualityTests Search quality tests
 
 Searches for Quality Test[s] by:
 
@@ -441,24 +636,24 @@ OR
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2QualityTestSearchPostRequest
+ @return ApiSearchQualityTestsRequest
 */
-func (a *QualityTestAPIService) V2QualityTestSearchPost(ctx context.Context) ApiV2QualityTestSearchPostRequest {
-	return ApiV2QualityTestSearchPostRequest{
+func (a *QualityTestAPIService) SearchQualityTests(ctx context.Context) ApiSearchQualityTestsRequest {
+	return ApiSearchQualityTestsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *QualityTestAPIService) V2QualityTestSearchPostExecute(r ApiV2QualityTestSearchPostRequest) (*http.Response, error) {
+func (a *QualityTestAPIService) SearchQualityTestsExecute(r ApiSearchQualityTestsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.V2QualityTestSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.SearchQualityTests")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -528,7 +723,7 @@ func (a *QualityTestAPIService) V2QualityTestSearchPostExecute(r ApiV2QualityTes
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -561,7 +756,7 @@ func (a *QualityTestAPIService) V2QualityTestSearchPostExecute(r ApiV2QualityTes
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -583,7 +778,7 @@ func (a *QualityTestAPIService) V2QualityTestSearchPostExecute(r ApiV2QualityTes
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -609,23 +804,23 @@ func (a *QualityTestAPIService) V2QualityTestSearchPostExecute(r ApiV2QualityTes
 	return localVarHTTPResponse, nil
 }
 
-type ApiV2QualityTestSetPostRequest struct {
+type ApiSetQualityTestRequest struct {
 	ctx context.Context
 	ApiService *QualityTestAPIService
 	qualityTest *QualityTest
 }
 
-func (r ApiV2QualityTestSetPostRequest) QualityTest(qualityTest QualityTest) ApiV2QualityTestSetPostRequest {
+func (r ApiSetQualityTestRequest) QualityTest(qualityTest QualityTest) ApiSetQualityTestRequest {
 	r.qualityTest = &qualityTest
 	return r
 }
 
-func (r ApiV2QualityTestSetPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2QualityTestSetPostExecute(r)
+func (r ApiSetQualityTestRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SetQualityTestExecute(r)
 }
 
 /*
-V2QualityTestSetPost Method for V2QualityTestSetPost
+SetQualityTest Create or update a quality test result
 
 Create or update a Quality Test record:
 - To update `id` must be supplied. Only the supplied fields will be updated, the rest will remain unchanged.
@@ -633,24 +828,24 @@ Create or update a Quality Test record:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2QualityTestSetPostRequest
+ @return ApiSetQualityTestRequest
 */
-func (a *QualityTestAPIService) V2QualityTestSetPost(ctx context.Context) ApiV2QualityTestSetPostRequest {
-	return ApiV2QualityTestSetPostRequest{
+func (a *QualityTestAPIService) SetQualityTest(ctx context.Context) ApiSetQualityTestRequest {
+	return ApiSetQualityTestRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *QualityTestAPIService) V2QualityTestSetPostExecute(r ApiV2QualityTestSetPostRequest) (*http.Response, error) {
+func (a *QualityTestAPIService) SetQualityTestExecute(r ApiSetQualityTestRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.V2QualityTestSetPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.SetQualityTest")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -720,7 +915,7 @@ func (a *QualityTestAPIService) V2QualityTestSetPostExecute(r ApiV2QualityTestSe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -753,7 +948,7 @@ func (a *QualityTestAPIService) V2QualityTestSetPostExecute(r ApiV2QualityTestSe
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -775,202 +970,7 @@ func (a *QualityTestAPIService) V2QualityTestSetPostExecute(r ApiV2QualityTestSe
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v GenericError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiV2QualityTestsDeletePostRequest struct {
-	ctx context.Context
-	ApiService *QualityTestAPIService
-	v2QualityTestsDeletePostRequest *V2QualityTestsDeletePostRequest
-}
-
-func (r ApiV2QualityTestsDeletePostRequest) V2QualityTestsDeletePostRequest(v2QualityTestsDeletePostRequest V2QualityTestsDeletePostRequest) ApiV2QualityTestsDeletePostRequest {
-	r.v2QualityTestsDeletePostRequest = &v2QualityTestsDeletePostRequest
-	return r
-}
-
-func (r ApiV2QualityTestsDeletePostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2QualityTestsDeletePostExecute(r)
-}
-
-/*
-V2QualityTestsDeletePost Method for V2QualityTestsDeletePost
-
-Bulk deletes quality tests, either:
-- All quality tests on a given `line` whose `timsetamp` is between `start_time` and `end_time`
-OR
-- All quality tests whose `id` is supplied
-
-It will do one or the other, with a bias for `id`'s if both are supplied.
-
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2QualityTestsDeletePostRequest
-*/
-func (a *QualityTestAPIService) V2QualityTestsDeletePost(ctx context.Context) ApiV2QualityTestsDeletePostRequest {
-	return ApiV2QualityTestsDeletePostRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-func (a *QualityTestAPIService) V2QualityTestsDeletePostExecute(r ApiV2QualityTestsDeletePostRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QualityTestAPIService.V2QualityTestsDeletePost")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/quality_tests/delete"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.v2QualityTestsDeletePostRequest == nil {
-		return nil, reportError("v2QualityTestsDeletePostRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.v2QualityTestsDeletePostRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v GenericError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v GenericError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 501 {
-			var v GenericError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

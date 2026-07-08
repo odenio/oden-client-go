@@ -4,16 +4,16 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2ProductAttributeSearchPost**](ProductAttributesAPI.md#V2ProductAttributeSearchPost) | **Post** /v2/product_attribute/search | 
-[**V2ProductAttributeSetPost**](ProductAttributesAPI.md#V2ProductAttributeSetPost) | **Post** /v2/product_attribute/set | 
+[**SearchProductAttributes**](ProductAttributesAPI.md#SearchProductAttributes) | **Post** /v2/product_attribute/search | Search product attributes
+[**SetProductAttribute**](ProductAttributesAPI.md#SetProductAttribute) | **Post** /v2/product_attribute/set | Create or update a product attribute
 
 
 
-## V2ProductAttributeSearchPost
+## SearchProductAttributes
 
-> []ProductAttribute V2ProductAttributeSearchPost(ctx).ProductAttribute(productAttribute).Execute()
+> []ProductAttribute SearchProductAttributes(ctx).ProductAttribute(productAttribute).Execute()
 
-
+Search product attributes
 
 
 
@@ -34,13 +34,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProductAttributesAPI.V2ProductAttributeSearchPost(context.Background()).ProductAttribute(productAttribute).Execute()
+	resp, r, err := apiClient.ProductAttributesAPI.SearchProductAttributes(context.Background()).ProductAttribute(productAttribute).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProductAttributesAPI.V2ProductAttributeSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ProductAttributesAPI.SearchProductAttributes``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2ProductAttributeSearchPost`: []ProductAttribute
-	fmt.Fprintf(os.Stdout, "Response from `ProductAttributesAPI.V2ProductAttributeSearchPost`: %v\n", resp)
+	// response from `SearchProductAttributes`: []ProductAttribute
+	fmt.Fprintf(os.Stdout, "Response from `ProductAttributesAPI.SearchProductAttributes`: %v\n", resp)
 }
 ```
 
@@ -50,7 +50,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ProductAttributeSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchProductAttributesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -75,11 +75,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2ProductAttributeSetPost
+## SetProductAttribute
 
-> []ProductAttribute V2ProductAttributeSetPost(ctx).ProductAttribute(productAttribute).Execute()
+> []ProductAttribute SetProductAttribute(ctx).ProductAttribute(productAttribute).Execute()
 
-
+Create or update a product attribute
 
 
 
@@ -100,13 +100,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProductAttributesAPI.V2ProductAttributeSetPost(context.Background()).ProductAttribute(productAttribute).Execute()
+	resp, r, err := apiClient.ProductAttributesAPI.SetProductAttribute(context.Background()).ProductAttribute(productAttribute).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProductAttributesAPI.V2ProductAttributeSetPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ProductAttributesAPI.SetProductAttribute``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2ProductAttributeSetPost`: []ProductAttribute
-	fmt.Fprintf(os.Stdout, "Response from `ProductAttributesAPI.V2ProductAttributeSetPost`: %v\n", resp)
+	// response from `SetProductAttribute`: []ProductAttribute
+	fmt.Fprintf(os.Stdout, "Response from `ProductAttributesAPI.SetProductAttribute`: %v\n", resp)
 }
 ```
 
@@ -116,7 +116,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ProductAttributeSetPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetProductAttributeRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

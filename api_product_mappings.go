@@ -23,23 +23,23 @@ import (
 // ProductMappingsAPIService ProductMappingsAPI service
 type ProductMappingsAPIService service
 
-type ApiV2ProductMappingSearchPostRequest struct {
+type ApiSearchProductMappingsRequest struct {
 	ctx context.Context
 	ApiService *ProductMappingsAPIService
 	productMapping *ProductMapping
 }
 
-func (r ApiV2ProductMappingSearchPostRequest) ProductMapping(productMapping ProductMapping) ApiV2ProductMappingSearchPostRequest {
+func (r ApiSearchProductMappingsRequest) ProductMapping(productMapping ProductMapping) ApiSearchProductMappingsRequest {
 	r.productMapping = &productMapping
 	return r
 }
 
-func (r ApiV2ProductMappingSearchPostRequest) Execute() ([]ProductMapping, *http.Response, error) {
-	return r.ApiService.V2ProductMappingSearchPostExecute(r)
+func (r ApiSearchProductMappingsRequest) Execute() ([]ProductMapping, *http.Response, error) {
+	return r.ApiService.SearchProductMappingsExecute(r)
 }
 
 /*
-V2ProductMappingSearchPost Method for V2ProductMappingSearchPost
+SearchProductMappings Search product-to-line mappings
 
 Searches for Product Mappings.
 
@@ -50,10 +50,10 @@ or `id`s from `name`s.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ProductMappingSearchPostRequest
+ @return ApiSearchProductMappingsRequest
 */
-func (a *ProductMappingsAPIService) V2ProductMappingSearchPost(ctx context.Context) ApiV2ProductMappingSearchPostRequest {
-	return ApiV2ProductMappingSearchPostRequest{
+func (a *ProductMappingsAPIService) SearchProductMappings(ctx context.Context) ApiSearchProductMappingsRequest {
+	return ApiSearchProductMappingsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -61,7 +61,7 @@ func (a *ProductMappingsAPIService) V2ProductMappingSearchPost(ctx context.Conte
 
 // Execute executes the request
 //  @return []ProductMapping
-func (a *ProductMappingsAPIService) V2ProductMappingSearchPostExecute(r ApiV2ProductMappingSearchPostRequest) ([]ProductMapping, *http.Response, error) {
+func (a *ProductMappingsAPIService) SearchProductMappingsExecute(r ApiSearchProductMappingsRequest) ([]ProductMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -69,7 +69,7 @@ func (a *ProductMappingsAPIService) V2ProductMappingSearchPostExecute(r ApiV2Pro
 		localVarReturnValue  []ProductMapping
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductMappingsAPIService.V2ProductMappingSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductMappingsAPIService.SearchProductMappings")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,7 +139,7 @@ func (a *ProductMappingsAPIService) V2ProductMappingSearchPostExecute(r ApiV2Pro
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -161,7 +161,7 @@ func (a *ProductMappingsAPIService) V2ProductMappingSearchPostExecute(r ApiV2Pro
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -183,7 +183,7 @@ func (a *ProductMappingsAPIService) V2ProductMappingSearchPostExecute(r ApiV2Pro
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -207,23 +207,23 @@ func (a *ProductMappingsAPIService) V2ProductMappingSearchPostExecute(r ApiV2Pro
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV2ProductMappingSetPostRequest struct {
+type ApiSetProductMappingRequest struct {
 	ctx context.Context
 	ApiService *ProductMappingsAPIService
 	productMapping *ProductMapping
 }
 
-func (r ApiV2ProductMappingSetPostRequest) ProductMapping(productMapping ProductMapping) ApiV2ProductMappingSetPostRequest {
+func (r ApiSetProductMappingRequest) ProductMapping(productMapping ProductMapping) ApiSetProductMappingRequest {
 	r.productMapping = &productMapping
 	return r
 }
 
-func (r ApiV2ProductMappingSetPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2ProductMappingSetPostExecute(r)
+func (r ApiSetProductMappingRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SetProductMappingExecute(r)
 }
 
 /*
-V2ProductMappingSetPost Method for V2ProductMappingSetPost
+SetProductMapping Map a product to a line
 
 Map a Product to a Line - implying this Line can produce, or is producing this Product.
 
@@ -231,24 +231,24 @@ If the supplied Product doesn't exist, it will be created.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ProductMappingSetPostRequest
+ @return ApiSetProductMappingRequest
 */
-func (a *ProductMappingsAPIService) V2ProductMappingSetPost(ctx context.Context) ApiV2ProductMappingSetPostRequest {
-	return ApiV2ProductMappingSetPostRequest{
+func (a *ProductMappingsAPIService) SetProductMapping(ctx context.Context) ApiSetProductMappingRequest {
+	return ApiSetProductMappingRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *ProductMappingsAPIService) V2ProductMappingSetPostExecute(r ApiV2ProductMappingSetPostRequest) (*http.Response, error) {
+func (a *ProductMappingsAPIService) SetProductMappingExecute(r ApiSetProductMappingRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductMappingsAPIService.V2ProductMappingSetPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductMappingsAPIService.SetProductMapping")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -318,7 +318,7 @@ func (a *ProductMappingsAPIService) V2ProductMappingSetPostExecute(r ApiV2Produc
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -340,7 +340,7 @@ func (a *ProductMappingsAPIService) V2ProductMappingSetPostExecute(r ApiV2Produc
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -362,7 +362,7 @@ func (a *ProductMappingsAPIService) V2ProductMappingSetPostExecute(r ApiV2Produc
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

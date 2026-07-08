@@ -23,23 +23,23 @@ import (
 // MaintenanceWorkOrdersAPIService MaintenanceWorkOrdersAPI service
 type MaintenanceWorkOrdersAPIService service
 
-type ApiV2MaintenanceWorkOrderDeletePostRequest struct {
+type ApiDeleteMaintenanceWorkOrderRequest struct {
 	ctx context.Context
 	ApiService *MaintenanceWorkOrdersAPIService
 	maintenanceWorkOrder *MaintenanceWorkOrder
 }
 
-func (r ApiV2MaintenanceWorkOrderDeletePostRequest) MaintenanceWorkOrder(maintenanceWorkOrder MaintenanceWorkOrder) ApiV2MaintenanceWorkOrderDeletePostRequest {
+func (r ApiDeleteMaintenanceWorkOrderRequest) MaintenanceWorkOrder(maintenanceWorkOrder MaintenanceWorkOrder) ApiDeleteMaintenanceWorkOrderRequest {
 	r.maintenanceWorkOrder = &maintenanceWorkOrder
 	return r
 }
 
-func (r ApiV2MaintenanceWorkOrderDeletePostRequest) Execute() ([]MaintenanceWorkOrder, *http.Response, error) {
-	return r.ApiService.V2MaintenanceWorkOrderDeletePostExecute(r)
+func (r ApiDeleteMaintenanceWorkOrderRequest) Execute() ([]MaintenanceWorkOrder, *http.Response, error) {
+	return r.ApiService.DeleteMaintenanceWorkOrderExecute(r)
 }
 
 /*
-V2MaintenanceWorkOrderDeletePost Method for V2MaintenanceWorkOrderDeletePost
+DeleteMaintenanceWorkOrder Delete a maintenance work order
 
 Delete a Maintenance Work Order by unique identifier:
 - `id` OR `external_id`
@@ -47,10 +47,10 @@ Delete a Maintenance Work Order by unique identifier:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2MaintenanceWorkOrderDeletePostRequest
+ @return ApiDeleteMaintenanceWorkOrderRequest
 */
-func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePost(ctx context.Context) ApiV2MaintenanceWorkOrderDeletePostRequest {
-	return ApiV2MaintenanceWorkOrderDeletePostRequest{
+func (a *MaintenanceWorkOrdersAPIService) DeleteMaintenanceWorkOrder(ctx context.Context) ApiDeleteMaintenanceWorkOrderRequest {
+	return ApiDeleteMaintenanceWorkOrderRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -58,7 +58,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePost(ctx c
 
 // Execute executes the request
 //  @return []MaintenanceWorkOrder
-func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePostExecute(r ApiV2MaintenanceWorkOrderDeletePostRequest) ([]MaintenanceWorkOrder, *http.Response, error) {
+func (a *MaintenanceWorkOrdersAPIService) DeleteMaintenanceWorkOrderExecute(r ApiDeleteMaintenanceWorkOrderRequest) ([]MaintenanceWorkOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -66,7 +66,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePostExecut
 		localVarReturnValue  []MaintenanceWorkOrder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.V2MaintenanceWorkOrderDeletePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.DeleteMaintenanceWorkOrder")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -136,7 +136,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePostExecut
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -180,7 +180,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePostExecut
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -191,7 +191,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePostExecut
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -226,23 +226,23 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderDeletePostExecut
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV2MaintenanceWorkOrderSearchPostRequest struct {
+type ApiSearchMaintenanceWorkOrdersRequest struct {
 	ctx context.Context
 	ApiService *MaintenanceWorkOrdersAPIService
-	v2MaintenanceWorkOrderSearchPostRequest *V2MaintenanceWorkOrderSearchPostRequest
+	searchMaintenanceWorkOrdersRequest *SearchMaintenanceWorkOrdersRequest
 }
 
-func (r ApiV2MaintenanceWorkOrderSearchPostRequest) V2MaintenanceWorkOrderSearchPostRequest(v2MaintenanceWorkOrderSearchPostRequest V2MaintenanceWorkOrderSearchPostRequest) ApiV2MaintenanceWorkOrderSearchPostRequest {
-	r.v2MaintenanceWorkOrderSearchPostRequest = &v2MaintenanceWorkOrderSearchPostRequest
+func (r ApiSearchMaintenanceWorkOrdersRequest) SearchMaintenanceWorkOrdersRequest(searchMaintenanceWorkOrdersRequest SearchMaintenanceWorkOrdersRequest) ApiSearchMaintenanceWorkOrdersRequest {
+	r.searchMaintenanceWorkOrdersRequest = &searchMaintenanceWorkOrdersRequest
 	return r
 }
 
-func (r ApiV2MaintenanceWorkOrderSearchPostRequest) Execute() ([]MaintenanceWorkOrder, *http.Response, error) {
-	return r.ApiService.V2MaintenanceWorkOrderSearchPostExecute(r)
+func (r ApiSearchMaintenanceWorkOrdersRequest) Execute() ([]MaintenanceWorkOrder, *http.Response, error) {
+	return r.ApiService.SearchMaintenanceWorkOrdersExecute(r)
 }
 
 /*
-V2MaintenanceWorkOrderSearchPost Method for V2MaintenanceWorkOrderSearchPost
+SearchMaintenanceWorkOrders Search maintenance work orders
 
 Search for Maintenance Work Orders by:
 - `id`
@@ -251,10 +251,10 @@ Search for Maintenance Work Orders by:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2MaintenanceWorkOrderSearchPostRequest
+ @return ApiSearchMaintenanceWorkOrdersRequest
 */
-func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPost(ctx context.Context) ApiV2MaintenanceWorkOrderSearchPostRequest {
-	return ApiV2MaintenanceWorkOrderSearchPostRequest{
+func (a *MaintenanceWorkOrdersAPIService) SearchMaintenanceWorkOrders(ctx context.Context) ApiSearchMaintenanceWorkOrdersRequest {
+	return ApiSearchMaintenanceWorkOrdersRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -262,7 +262,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPost(ctx c
 
 // Execute executes the request
 //  @return []MaintenanceWorkOrder
-func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecute(r ApiV2MaintenanceWorkOrderSearchPostRequest) ([]MaintenanceWorkOrder, *http.Response, error) {
+func (a *MaintenanceWorkOrdersAPIService) SearchMaintenanceWorkOrdersExecute(r ApiSearchMaintenanceWorkOrdersRequest) ([]MaintenanceWorkOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -270,7 +270,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecut
 		localVarReturnValue  []MaintenanceWorkOrder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.V2MaintenanceWorkOrderSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.SearchMaintenanceWorkOrders")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -280,8 +280,8 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.v2MaintenanceWorkOrderSearchPostRequest == nil {
-		return localVarReturnValue, nil, reportError("v2MaintenanceWorkOrderSearchPostRequest is required and must be specified")
+	if r.searchMaintenanceWorkOrdersRequest == nil {
+		return localVarReturnValue, nil, reportError("searchMaintenanceWorkOrdersRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -302,7 +302,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecut
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.v2MaintenanceWorkOrderSearchPostRequest
+	localVarPostBody = r.searchMaintenanceWorkOrdersRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -340,7 +340,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecut
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -384,7 +384,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecut
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -395,7 +395,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecut
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -430,23 +430,23 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSearchPostExecut
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV2MaintenanceWorkOrderSetPostRequest struct {
+type ApiSetMaintenanceWorkOrderRequest struct {
 	ctx context.Context
 	ApiService *MaintenanceWorkOrdersAPIService
 	maintenanceWorkOrder *MaintenanceWorkOrder
 }
 
-func (r ApiV2MaintenanceWorkOrderSetPostRequest) MaintenanceWorkOrder(maintenanceWorkOrder MaintenanceWorkOrder) ApiV2MaintenanceWorkOrderSetPostRequest {
+func (r ApiSetMaintenanceWorkOrderRequest) MaintenanceWorkOrder(maintenanceWorkOrder MaintenanceWorkOrder) ApiSetMaintenanceWorkOrderRequest {
 	r.maintenanceWorkOrder = &maintenanceWorkOrder
 	return r
 }
 
-func (r ApiV2MaintenanceWorkOrderSetPostRequest) Execute() (*MaintenanceWorkOrder, *http.Response, error) {
-	return r.ApiService.V2MaintenanceWorkOrderSetPostExecute(r)
+func (r ApiSetMaintenanceWorkOrderRequest) Execute() (*MaintenanceWorkOrder, *http.Response, error) {
+	return r.ApiService.SetMaintenanceWorkOrderExecute(r)
 }
 
 /*
-V2MaintenanceWorkOrderSetPost Method for V2MaintenanceWorkOrderSetPost
+SetMaintenanceWorkOrder Create or update a maintenance work order
 
 Create or update a Maintenance Work Order.
 
@@ -463,10 +463,10 @@ NOTE: Any fields not included in an update request will be left unchanged.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2MaintenanceWorkOrderSetPostRequest
+ @return ApiSetMaintenanceWorkOrderRequest
 */
-func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPost(ctx context.Context) ApiV2MaintenanceWorkOrderSetPostRequest {
-	return ApiV2MaintenanceWorkOrderSetPostRequest{
+func (a *MaintenanceWorkOrdersAPIService) SetMaintenanceWorkOrder(ctx context.Context) ApiSetMaintenanceWorkOrderRequest {
+	return ApiSetMaintenanceWorkOrderRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -474,7 +474,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPost(ctx cont
 
 // Execute executes the request
 //  @return MaintenanceWorkOrder
-func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPostExecute(r ApiV2MaintenanceWorkOrderSetPostRequest) (*MaintenanceWorkOrder, *http.Response, error) {
+func (a *MaintenanceWorkOrdersAPIService) SetMaintenanceWorkOrderExecute(r ApiSetMaintenanceWorkOrderRequest) (*MaintenanceWorkOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -482,7 +482,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPostExecute(r
 		localVarReturnValue  *MaintenanceWorkOrder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.V2MaintenanceWorkOrderSetPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWorkOrdersAPIService.SetMaintenanceWorkOrder")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -552,7 +552,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPostExecute(r
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -596,7 +596,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPostExecute(r
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -607,7 +607,7 @@ func (a *MaintenanceWorkOrdersAPIService) V2MaintenanceWorkOrderSetPostExecute(r
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

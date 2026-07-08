@@ -4,17 +4,17 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2ScrapYieldDeletePost**](ScrapYieldDataAPI.md#V2ScrapYieldDeletePost) | **Post** /v2/scrap_yield/delete | 
-[**V2ScrapYieldSearchPost**](ScrapYieldDataAPI.md#V2ScrapYieldSearchPost) | **Post** /v2/scrap_yield/search | 
-[**V2ScrapYieldSetPost**](ScrapYieldDataAPI.md#V2ScrapYieldSetPost) | **Post** /v2/scrap_yield/set | 
+[**DeleteScrapYield**](ScrapYieldDataAPI.md#DeleteScrapYield) | **Post** /v2/scrap_yield/delete | Delete a scrap/yield record
+[**SearchScrapYield**](ScrapYieldDataAPI.md#SearchScrapYield) | **Post** /v2/scrap_yield/search | Search scrap/yield records
+[**SetScrapYield**](ScrapYieldDataAPI.md#SetScrapYield) | **Post** /v2/scrap_yield/set | Create or update a scrap/yield record
 
 
 
-## V2ScrapYieldDeletePost
+## DeleteScrapYield
 
-> V2ScrapYieldDeletePost(ctx).V2ScrapYieldSearchPostRequest(v2ScrapYieldSearchPostRequest).Execute()
+> DeleteScrapYield(ctx).SearchScrapYieldRequest(searchScrapYieldRequest).Execute()
 
-
+Delete a scrap/yield record
 
 
 
@@ -31,13 +31,13 @@ import (
 )
 
 func main() {
-	v2ScrapYieldSearchPostRequest := *openapiclient.NewV2ScrapYieldSearchPostRequest(*openapiclient.NewInterval(*openapiclient.NewIntervalType(), *openapiclient.NewLine())) // V2ScrapYieldSearchPostRequest | 
+	searchScrapYieldRequest := *openapiclient.NewSearchScrapYieldRequest(*openapiclient.NewInterval(*openapiclient.NewIntervalType(), *openapiclient.NewLine())) // SearchScrapYieldRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ScrapYieldDataAPI.V2ScrapYieldDeletePost(context.Background()).V2ScrapYieldSearchPostRequest(v2ScrapYieldSearchPostRequest).Execute()
+	r, err := apiClient.ScrapYieldDataAPI.DeleteScrapYield(context.Background()).SearchScrapYieldRequest(searchScrapYieldRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ScrapYieldDataAPI.V2ScrapYieldDeletePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ScrapYieldDataAPI.DeleteScrapYield``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -49,12 +49,12 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ScrapYieldDeletePostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteScrapYieldRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **v2ScrapYieldSearchPostRequest** | [**V2ScrapYieldSearchPostRequest**](V2ScrapYieldSearchPostRequest.md) |  | 
+ **searchScrapYieldRequest** | [**SearchScrapYieldRequest**](SearchScrapYieldRequest.md) |  | 
 
 ### Return type
 
@@ -74,11 +74,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2ScrapYieldSearchPost
+## SearchScrapYield
 
-> V2ScrapYieldSearchPost(ctx).V2ScrapYieldSearchPostRequest(v2ScrapYieldSearchPostRequest).Execute()
+> SearchScrapYield(ctx).SearchScrapYieldRequest(searchScrapYieldRequest).Execute()
 
-
+Search scrap/yield records
 
 
 
@@ -95,13 +95,13 @@ import (
 )
 
 func main() {
-	v2ScrapYieldSearchPostRequest := *openapiclient.NewV2ScrapYieldSearchPostRequest(*openapiclient.NewInterval(*openapiclient.NewIntervalType(), *openapiclient.NewLine())) // V2ScrapYieldSearchPostRequest | 
+	searchScrapYieldRequest := *openapiclient.NewSearchScrapYieldRequest(*openapiclient.NewInterval(*openapiclient.NewIntervalType(), *openapiclient.NewLine())) // SearchScrapYieldRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ScrapYieldDataAPI.V2ScrapYieldSearchPost(context.Background()).V2ScrapYieldSearchPostRequest(v2ScrapYieldSearchPostRequest).Execute()
+	r, err := apiClient.ScrapYieldDataAPI.SearchScrapYield(context.Background()).SearchScrapYieldRequest(searchScrapYieldRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ScrapYieldDataAPI.V2ScrapYieldSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ScrapYieldDataAPI.SearchScrapYield``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -113,12 +113,12 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ScrapYieldSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchScrapYieldRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **v2ScrapYieldSearchPostRequest** | [**V2ScrapYieldSearchPostRequest**](V2ScrapYieldSearchPostRequest.md) |  | 
+ **searchScrapYieldRequest** | [**SearchScrapYieldRequest**](SearchScrapYieldRequest.md) |  | 
 
 ### Return type
 
@@ -138,11 +138,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2ScrapYieldSetPost
+## SetScrapYield
 
-> V2ScrapYieldSetPost(ctx).V2ScrapYieldSetPostRequest(v2ScrapYieldSetPostRequest).Pattern(pattern).Execute()
+> SetScrapYield(ctx).SetScrapYieldRequest(setScrapYieldRequest).Pattern(pattern).Execute()
 
-
+Create or update a scrap/yield record
 
 
 
@@ -159,14 +159,14 @@ import (
 )
 
 func main() {
-	v2ScrapYieldSetPostRequest := *openapiclient.NewV2ScrapYieldSetPostRequest(*openapiclient.NewScrapYieldData(), *openapiclient.NewInterval(*openapiclient.NewIntervalType(), *openapiclient.NewLine())) // V2ScrapYieldSetPostRequest | 
+	setScrapYieldRequest := *openapiclient.NewSetScrapYieldRequest(*openapiclient.NewScrapYieldData(), *openapiclient.NewInterval(*openapiclient.NewIntervalType(), *openapiclient.NewLine())) // SetScrapYieldRequest | 
 	pattern := "pattern_example" // string | Optional pattern type to use for matching: - `exact` for exact match - `contains` for the string to be contained in the query - `regex` to match based on a regular expression  (optional) (default to "exact")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ScrapYieldDataAPI.V2ScrapYieldSetPost(context.Background()).V2ScrapYieldSetPostRequest(v2ScrapYieldSetPostRequest).Pattern(pattern).Execute()
+	r, err := apiClient.ScrapYieldDataAPI.SetScrapYield(context.Background()).SetScrapYieldRequest(setScrapYieldRequest).Pattern(pattern).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ScrapYieldDataAPI.V2ScrapYieldSetPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ScrapYieldDataAPI.SetScrapYield``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -178,12 +178,12 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ScrapYieldSetPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetScrapYieldRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **v2ScrapYieldSetPostRequest** | [**V2ScrapYieldSetPostRequest**](V2ScrapYieldSetPostRequest.md) |  | 
+ **setScrapYieldRequest** | [**SetScrapYieldRequest**](SetScrapYieldRequest.md) |  | 
  **pattern** | **string** | Optional pattern type to use for matching: - &#x60;exact&#x60; for exact match - &#x60;contains&#x60; for the string to be contained in the query - &#x60;regex&#x60; to match based on a regular expression  | [default to &quot;exact&quot;]
 
 ### Return type

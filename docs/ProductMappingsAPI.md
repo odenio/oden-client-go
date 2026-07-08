@@ -4,16 +4,16 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2ProductMappingSearchPost**](ProductMappingsAPI.md#V2ProductMappingSearchPost) | **Post** /v2/product_mapping/search | 
-[**V2ProductMappingSetPost**](ProductMappingsAPI.md#V2ProductMappingSetPost) | **Post** /v2/product_mapping/set | 
+[**SearchProductMappings**](ProductMappingsAPI.md#SearchProductMappings) | **Post** /v2/product_mapping/search | Search product-to-line mappings
+[**SetProductMapping**](ProductMappingsAPI.md#SetProductMapping) | **Post** /v2/product_mapping/set | Map a product to a line
 
 
 
-## V2ProductMappingSearchPost
+## SearchProductMappings
 
-> []ProductMapping V2ProductMappingSearchPost(ctx).ProductMapping(productMapping).Execute()
+> []ProductMapping SearchProductMappings(ctx).ProductMapping(productMapping).Execute()
 
-
+Search product-to-line mappings
 
 
 
@@ -34,13 +34,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProductMappingsAPI.V2ProductMappingSearchPost(context.Background()).ProductMapping(productMapping).Execute()
+	resp, r, err := apiClient.ProductMappingsAPI.SearchProductMappings(context.Background()).ProductMapping(productMapping).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProductMappingsAPI.V2ProductMappingSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ProductMappingsAPI.SearchProductMappings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2ProductMappingSearchPost`: []ProductMapping
-	fmt.Fprintf(os.Stdout, "Response from `ProductMappingsAPI.V2ProductMappingSearchPost`: %v\n", resp)
+	// response from `SearchProductMappings`: []ProductMapping
+	fmt.Fprintf(os.Stdout, "Response from `ProductMappingsAPI.SearchProductMappings`: %v\n", resp)
 }
 ```
 
@@ -50,7 +50,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ProductMappingSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchProductMappingsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -75,11 +75,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2ProductMappingSetPost
+## SetProductMapping
 
-> V2ProductMappingSetPost(ctx).ProductMapping(productMapping).Execute()
+> SetProductMapping(ctx).ProductMapping(productMapping).Execute()
 
-
+Map a product to a line
 
 
 
@@ -100,9 +100,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ProductMappingsAPI.V2ProductMappingSetPost(context.Background()).ProductMapping(productMapping).Execute()
+	r, err := apiClient.ProductMappingsAPI.SetProductMapping(context.Background()).ProductMapping(productMapping).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProductMappingsAPI.V2ProductMappingSetPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ProductMappingsAPI.SetProductMapping``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -114,7 +114,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2ProductMappingSetPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetProductMappingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

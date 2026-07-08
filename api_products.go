@@ -23,23 +23,23 @@ import (
 // ProductsAPIService ProductsAPI service
 type ProductsAPIService service
 
-type ApiV2ProductDeletePostRequest struct {
+type ApiDeleteProductRequest struct {
 	ctx context.Context
 	ApiService *ProductsAPIService
 	product *Product
 }
 
-func (r ApiV2ProductDeletePostRequest) Product(product Product) ApiV2ProductDeletePostRequest {
+func (r ApiDeleteProductRequest) Product(product Product) ApiDeleteProductRequest {
 	r.product = &product
 	return r
 }
 
-func (r ApiV2ProductDeletePostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2ProductDeletePostExecute(r)
+func (r ApiDeleteProductRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteProductExecute(r)
 }
 
 /*
-V2ProductDeletePost Method for V2ProductDeletePost
+DeleteProduct Delete a product
 
 Delete a Product by unique identifier:
 - `name`
@@ -54,24 +54,24 @@ A deleted Product will not show up in Product searches or dropdowns, but associa
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ProductDeletePostRequest
+ @return ApiDeleteProductRequest
 */
-func (a *ProductsAPIService) V2ProductDeletePost(ctx context.Context) ApiV2ProductDeletePostRequest {
-	return ApiV2ProductDeletePostRequest{
+func (a *ProductsAPIService) DeleteProduct(ctx context.Context) ApiDeleteProductRequest {
+	return ApiDeleteProductRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *ProductsAPIService) V2ProductDeletePostExecute(r ApiV2ProductDeletePostRequest) (*http.Response, error) {
+func (a *ProductsAPIService) DeleteProductExecute(r ApiDeleteProductRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.V2ProductDeletePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.DeleteProduct")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -141,7 +141,7 @@ func (a *ProductsAPIService) V2ProductDeletePostExecute(r ApiV2ProductDeletePost
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -163,7 +163,7 @@ func (a *ProductsAPIService) V2ProductDeletePostExecute(r ApiV2ProductDeletePost
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -185,7 +185,7 @@ func (a *ProductsAPIService) V2ProductDeletePostExecute(r ApiV2ProductDeletePost
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -211,23 +211,23 @@ func (a *ProductsAPIService) V2ProductDeletePostExecute(r ApiV2ProductDeletePost
 	return localVarHTTPResponse, nil
 }
 
-type ApiV2ProductSearchPostRequest struct {
+type ApiSearchProductsRequest struct {
 	ctx context.Context
 	ApiService *ProductsAPIService
 	product *Product
 }
 
-func (r ApiV2ProductSearchPostRequest) Product(product Product) ApiV2ProductSearchPostRequest {
+func (r ApiSearchProductsRequest) Product(product Product) ApiSearchProductsRequest {
 	r.product = &product
 	return r
 }
 
-func (r ApiV2ProductSearchPostRequest) Execute() ([]Product, *http.Response, error) {
-	return r.ApiService.V2ProductSearchPostExecute(r)
+func (r ApiSearchProductsRequest) Execute() ([]Product, *http.Response, error) {
+	return r.ApiService.SearchProductsExecute(r)
 }
 
 /*
-V2ProductSearchPost Method for V2ProductSearchPost
+SearchProducts Search products
 
 Search for specific Product:
 - `name`
@@ -242,10 +242,10 @@ May be used to confirm a Product exists or to get a Product `id` if `name` is kn
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ProductSearchPostRequest
+ @return ApiSearchProductsRequest
 */
-func (a *ProductsAPIService) V2ProductSearchPost(ctx context.Context) ApiV2ProductSearchPostRequest {
-	return ApiV2ProductSearchPostRequest{
+func (a *ProductsAPIService) SearchProducts(ctx context.Context) ApiSearchProductsRequest {
+	return ApiSearchProductsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -253,7 +253,7 @@ func (a *ProductsAPIService) V2ProductSearchPost(ctx context.Context) ApiV2Produ
 
 // Execute executes the request
 //  @return []Product
-func (a *ProductsAPIService) V2ProductSearchPostExecute(r ApiV2ProductSearchPostRequest) ([]Product, *http.Response, error) {
+func (a *ProductsAPIService) SearchProductsExecute(r ApiSearchProductsRequest) ([]Product, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -261,7 +261,7 @@ func (a *ProductsAPIService) V2ProductSearchPostExecute(r ApiV2ProductSearchPost
 		localVarReturnValue  []Product
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.V2ProductSearchPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.SearchProducts")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -331,7 +331,7 @@ func (a *ProductsAPIService) V2ProductSearchPostExecute(r ApiV2ProductSearchPost
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -364,7 +364,7 @@ func (a *ProductsAPIService) V2ProductSearchPostExecute(r ApiV2ProductSearchPost
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -386,7 +386,7 @@ func (a *ProductsAPIService) V2ProductSearchPostExecute(r ApiV2ProductSearchPost
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -410,23 +410,23 @@ func (a *ProductsAPIService) V2ProductSearchPostExecute(r ApiV2ProductSearchPost
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV2ProductSetPostRequest struct {
+type ApiSetProductRequest struct {
 	ctx context.Context
 	ApiService *ProductsAPIService
 	product *Product
 }
 
-func (r ApiV2ProductSetPostRequest) Product(product Product) ApiV2ProductSetPostRequest {
+func (r ApiSetProductRequest) Product(product Product) ApiSetProductRequest {
 	r.product = &product
 	return r
 }
 
-func (r ApiV2ProductSetPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.V2ProductSetPostExecute(r)
+func (r ApiSetProductRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SetProductExecute(r)
 }
 
 /*
-V2ProductSetPost Method for V2ProductSetPost
+SetProduct Create or update a product
 
 To **create** a new Product, include `name`, and omit `id` field.
 
@@ -434,24 +434,24 @@ To **update** an existing Product, include the `id` of the existing product the 
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV2ProductSetPostRequest
+ @return ApiSetProductRequest
 */
-func (a *ProductsAPIService) V2ProductSetPost(ctx context.Context) ApiV2ProductSetPostRequest {
-	return ApiV2ProductSetPostRequest{
+func (a *ProductsAPIService) SetProduct(ctx context.Context) ApiSetProductRequest {
+	return ApiSetProductRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *ProductsAPIService) V2ProductSetPostExecute(r ApiV2ProductSetPostRequest) (*http.Response, error) {
+func (a *ProductsAPIService) SetProductExecute(r ApiSetProductRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.V2ProductSetPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.SetProduct")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -521,7 +521,7 @@ func (a *ProductsAPIService) V2ProductSetPostExecute(r ApiV2ProductSetPostReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v V2LineSearchPost409Response
+			var v SearchLines409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -543,7 +543,7 @@ func (a *ProductsAPIService) V2ProductSetPostExecute(r ApiV2ProductSetPostReques
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v V2LineSearchPost500Response
+			var v SearchLines500Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -565,7 +565,7 @@ func (a *ProductsAPIService) V2ProductSetPostExecute(r ApiV2ProductSetPostReques
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v V2LineSearchPost400Response
+			var v SearchLines400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

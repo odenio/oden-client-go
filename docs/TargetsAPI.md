@@ -4,16 +4,16 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2TargetSearchPost**](TargetsAPI.md#V2TargetSearchPost) | **Post** /v2/target/search | 
-[**V2TargetSetPost**](TargetsAPI.md#V2TargetSetPost) | **Post** /v2/target/set | 
+[**SearchTargets**](TargetsAPI.md#SearchTargets) | **Post** /v2/target/search | Search metric targets
+[**SetTarget**](TargetsAPI.md#SetTarget) | **Post** /v2/target/set | Create or update a metric target
 
 
 
-## V2TargetSearchPost
+## SearchTargets
 
-> []Target V2TargetSearchPost(ctx).Target(target).Execute()
+> []Target SearchTargets(ctx).Target(target).Execute()
 
-
+Search metric targets
 
 
 
@@ -34,13 +34,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TargetsAPI.V2TargetSearchPost(context.Background()).Target(target).Execute()
+	resp, r, err := apiClient.TargetsAPI.SearchTargets(context.Background()).Target(target).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TargetsAPI.V2TargetSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `TargetsAPI.SearchTargets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2TargetSearchPost`: []Target
-	fmt.Fprintf(os.Stdout, "Response from `TargetsAPI.V2TargetSearchPost`: %v\n", resp)
+	// response from `SearchTargets`: []Target
+	fmt.Fprintf(os.Stdout, "Response from `TargetsAPI.SearchTargets`: %v\n", resp)
 }
 ```
 
@@ -50,7 +50,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2TargetSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchTargetsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -75,11 +75,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2TargetSetPost
+## SetTarget
 
-> Target V2TargetSetPost(ctx).Target(target).Execute()
+> Target SetTarget(ctx).Target(target).Execute()
 
-
+Create or update a metric target
 
 
 
@@ -100,13 +100,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TargetsAPI.V2TargetSetPost(context.Background()).Target(target).Execute()
+	resp, r, err := apiClient.TargetsAPI.SetTarget(context.Background()).Target(target).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TargetsAPI.V2TargetSetPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `TargetsAPI.SetTarget``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2TargetSetPost`: Target
-	fmt.Fprintf(os.Stdout, "Response from `TargetsAPI.V2TargetSetPost`: %v\n", resp)
+	// response from `SetTarget`: Target
+	fmt.Fprintf(os.Stdout, "Response from `TargetsAPI.SetTarget`: %v\n", resp)
 }
 ```
 
@@ -116,7 +116,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2TargetSetPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetTargetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

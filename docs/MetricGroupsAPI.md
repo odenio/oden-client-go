@@ -4,15 +4,15 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2MetricGroupSearchPost**](MetricGroupsAPI.md#V2MetricGroupSearchPost) | **Post** /v2/metric_group/search | 
+[**SearchMetricGroups**](MetricGroupsAPI.md#SearchMetricGroups) | **Post** /v2/metric_group/search | Search metric groups
 
 
 
-## V2MetricGroupSearchPost
+## SearchMetricGroups
 
-> []MetricGroup V2MetricGroupSearchPost(ctx).MetricGroup(metricGroup).Execute()
+> []MetricGroup SearchMetricGroups(ctx).MetricGroup(metricGroup).Execute()
 
-
+Search metric groups
 
 
 
@@ -33,13 +33,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MetricGroupsAPI.V2MetricGroupSearchPost(context.Background()).MetricGroup(metricGroup).Execute()
+	resp, r, err := apiClient.MetricGroupsAPI.SearchMetricGroups(context.Background()).MetricGroup(metricGroup).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MetricGroupsAPI.V2MetricGroupSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MetricGroupsAPI.SearchMetricGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `V2MetricGroupSearchPost`: []MetricGroup
-	fmt.Fprintf(os.Stdout, "Response from `MetricGroupsAPI.V2MetricGroupSearchPost`: %v\n", resp)
+	// response from `SearchMetricGroups`: []MetricGroup
+	fmt.Fprintf(os.Stdout, "Response from `MetricGroupsAPI.SearchMetricGroups`: %v\n", resp)
 }
 ```
 
@@ -49,7 +49,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2MetricGroupSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchMetricGroupsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

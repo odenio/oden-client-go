@@ -4,19 +4,147 @@ All URIs are relative to *https://api.oden.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V2QualitySchemaSearchPost**](QualityTestAPI.md#V2QualitySchemaSearchPost) | **Post** /v2/quality_schema/search | 
-[**V2QualityTestDeletePost**](QualityTestAPI.md#V2QualityTestDeletePost) | **Post** /v2/quality_test/delete | 
-[**V2QualityTestSearchPost**](QualityTestAPI.md#V2QualityTestSearchPost) | **Post** /v2/quality_test/search | 
-[**V2QualityTestSetPost**](QualityTestAPI.md#V2QualityTestSetPost) | **Post** /v2/quality_test/set | 
-[**V2QualityTestsDeletePost**](QualityTestAPI.md#V2QualityTestsDeletePost) | **Post** /v2/quality_tests/delete | 
+[**BulkDeleteQualityTests**](QualityTestAPI.md#BulkDeleteQualityTests) | **Post** /v2/quality_tests/delete | Delete multiple quality tests
+[**DeleteQualityTest**](QualityTestAPI.md#DeleteQualityTest) | **Post** /v2/quality_test/delete | Delete a quality test
+[**SearchQualitySchemas**](QualityTestAPI.md#SearchQualitySchemas) | **Post** /v2/quality_schema/search | Search quality schemas for a factory
+[**SearchQualityTests**](QualityTestAPI.md#SearchQualityTests) | **Post** /v2/quality_test/search | Search quality tests
+[**SetQualityTest**](QualityTestAPI.md#SetQualityTest) | **Post** /v2/quality_test/set | Create or update a quality test result
 
 
 
-## V2QualitySchemaSearchPost
+## BulkDeleteQualityTests
 
-> V2QualitySchemaSearchPost(ctx).QualitySchema(qualitySchema).Execute()
+> BulkDeleteQualityTests(ctx).BulkDeleteQualityTestsRequest(bulkDeleteQualityTestsRequest).Execute()
+
+Delete multiple quality tests
 
 
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/odenio/oden-client-go"
+)
+
+func main() {
+	bulkDeleteQualityTestsRequest := *openapiclient.NewBulkDeleteQualityTestsRequest() // BulkDeleteQualityTestsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.QualityTestAPI.BulkDeleteQualityTests(context.Background()).BulkDeleteQualityTestsRequest(bulkDeleteQualityTestsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.BulkDeleteQualityTests``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiBulkDeleteQualityTestsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulkDeleteQualityTestsRequest** | [**BulkDeleteQualityTestsRequest**](BulkDeleteQualityTestsRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKeyAuth](../README.md#APIKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteQualityTest
+
+> DeleteQualityTest(ctx).QualityTest(qualityTest).Execute()
+
+Delete a quality test
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/odenio/oden-client-go"
+)
+
+func main() {
+	qualityTest := *openapiclient.NewQualityTest() // QualityTest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.QualityTestAPI.DeleteQualityTest(context.Background()).QualityTest(qualityTest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.DeleteQualityTest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteQualityTestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **qualityTest** | [**QualityTest**](QualityTest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[APIKeyAuth](../README.md#APIKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SearchQualitySchemas
+
+> SearchQualitySchemas(ctx).QualitySchema(qualitySchema).Execute()
+
+Search quality schemas for a factory
 
 
 
@@ -37,9 +165,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.QualityTestAPI.V2QualitySchemaSearchPost(context.Background()).QualitySchema(qualitySchema).Execute()
+	r, err := apiClient.QualityTestAPI.SearchQualitySchemas(context.Background()).QualitySchema(qualitySchema).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.V2QualitySchemaSearchPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.SearchQualitySchemas``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -51,7 +179,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2QualitySchemaSearchPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchQualitySchemasRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -76,11 +204,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2QualityTestDeletePost
+## SearchQualityTests
 
-> V2QualityTestDeletePost(ctx).QualityTest(qualityTest).Execute()
+> SearchQualityTests(ctx).QualityTest(qualityTest).Execute()
 
-
+Search quality tests
 
 
 
@@ -101,9 +229,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.QualityTestAPI.V2QualityTestDeletePost(context.Background()).QualityTest(qualityTest).Execute()
+	r, err := apiClient.QualityTestAPI.SearchQualityTests(context.Background()).QualityTest(qualityTest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.V2QualityTestDeletePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.SearchQualityTests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -115,7 +243,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2QualityTestDeletePostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSearchQualityTestsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -140,75 +268,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## V2QualityTestSearchPost
+## SetQualityTest
 
-> V2QualityTestSearchPost(ctx).QualityTest(qualityTest).Execute()
+> SetQualityTest(ctx).QualityTest(qualityTest).Execute()
 
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/odenio/oden-client-go"
-)
-
-func main() {
-	qualityTest := *openapiclient.NewQualityTest() // QualityTest | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.QualityTestAPI.V2QualityTestSearchPost(context.Background()).QualityTest(qualityTest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.V2QualityTestSearchPost``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiV2QualityTestSearchPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **qualityTest** | [**QualityTest**](QualityTest.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[APIKeyAuth](../README.md#APIKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## V2QualityTestSetPost
-
-> V2QualityTestSetPost(ctx).QualityTest(qualityTest).Execute()
-
-
+Create or update a quality test result
 
 
 
@@ -229,9 +293,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.QualityTestAPI.V2QualityTestSetPost(context.Background()).QualityTest(qualityTest).Execute()
+	r, err := apiClient.QualityTestAPI.SetQualityTest(context.Background()).QualityTest(qualityTest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.V2QualityTestSetPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.SetQualityTest``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -243,76 +307,12 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV2QualityTestSetPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetQualityTestRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **qualityTest** | [**QualityTest**](QualityTest.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[APIKeyAuth](../README.md#APIKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## V2QualityTestsDeletePost
-
-> V2QualityTestsDeletePost(ctx).V2QualityTestsDeletePostRequest(v2QualityTestsDeletePostRequest).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/odenio/oden-client-go"
-)
-
-func main() {
-	v2QualityTestsDeletePostRequest := *openapiclient.NewV2QualityTestsDeletePostRequest() // V2QualityTestsDeletePostRequest | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.QualityTestAPI.V2QualityTestsDeletePost(context.Background()).V2QualityTestsDeletePostRequest(v2QualityTestsDeletePostRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `QualityTestAPI.V2QualityTestsDeletePost``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiV2QualityTestsDeletePostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **v2QualityTestsDeletePostRequest** | [**V2QualityTestsDeletePostRequest**](V2QualityTestsDeletePostRequest.md) |  | 
 
 ### Return type
 
