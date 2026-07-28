@@ -13,6 +13,7 @@ package oden
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RunMetadata type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ MappedNullable = &RunMetadata{}
 
 // RunMetadata Metadata associated with a run interval
 type RunMetadata struct {
-	MetadataType *string `json:"metadata_type,omitempty"`
+	MetadataType string `json:"metadata_type"`
 	Product *Product `json:"product,omitempty"`
 	Target *Target `json:"target,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -32,8 +33,9 @@ type _RunMetadata RunMetadata
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRunMetadata() *RunMetadata {
+func NewRunMetadata(metadataType string) *RunMetadata {
 	this := RunMetadata{}
+	this.MetadataType = metadataType
 	return &this
 }
 
@@ -45,36 +47,28 @@ func NewRunMetadataWithDefaults() *RunMetadata {
 	return &this
 }
 
-// GetMetadataType returns the MetadataType field value if set, zero value otherwise.
+// GetMetadataType returns the MetadataType field value
 func (o *RunMetadata) GetMetadataType() string {
-	if o == nil || IsNil(o.MetadataType) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MetadataType
+
+	return o.MetadataType
 }
 
-// GetMetadataTypeOk returns a tuple with the MetadataType field value if set, nil otherwise
+// GetMetadataTypeOk returns a tuple with the MetadataType field value
 // and a boolean to check if the value has been set.
 func (o *RunMetadata) GetMetadataTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.MetadataType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetadataType, true
+	return &o.MetadataType, true
 }
 
-// HasMetadataType returns a boolean if a field has been set.
-func (o *RunMetadata) HasMetadataType() bool {
-	if o != nil && !IsNil(o.MetadataType) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadataType gets a reference to the given string and assigns it to the MetadataType field.
+// SetMetadataType sets field value
 func (o *RunMetadata) SetMetadataType(v string) {
-	o.MetadataType = &v
+	o.MetadataType = v
 }
 
 // GetProduct returns the Product field value if set, zero value otherwise.
@@ -151,9 +145,7 @@ func (o RunMetadata) MarshalJSON() ([]byte, error) {
 
 func (o RunMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetadataType) {
-		toSerialize["metadata_type"] = o.MetadataType
-	}
+	toSerialize["metadata_type"] = o.MetadataType
 	if !IsNil(o.Product) {
 		toSerialize["product"] = o.Product
 	}
@@ -169,6 +161,27 @@ func (o RunMetadata) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RunMetadata) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metadata_type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRunMetadata := _RunMetadata{}
 
 	err = json.Unmarshal(data, &varRunMetadata)

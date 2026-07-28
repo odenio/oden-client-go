@@ -13,6 +13,7 @@ package oden
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the StateMetadata type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ MappedNullable = &StateMetadata{}
 
 // StateMetadata Metadata associated with a state interval
 type StateMetadata struct {
-	MetadataType *string `json:"metadata_type,omitempty"`
+	MetadataType string `json:"metadata_type"`
 	Reason *StateReason `json:"reason,omitempty"`
 	Comment *string `json:"comment,omitempty"`
 	Category *StateCategory `json:"category,omitempty"`
@@ -33,8 +34,9 @@ type _StateMetadata StateMetadata
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStateMetadata() *StateMetadata {
+func NewStateMetadata(metadataType string) *StateMetadata {
 	this := StateMetadata{}
+	this.MetadataType = metadataType
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewStateMetadataWithDefaults() *StateMetadata {
 	return &this
 }
 
-// GetMetadataType returns the MetadataType field value if set, zero value otherwise.
+// GetMetadataType returns the MetadataType field value
 func (o *StateMetadata) GetMetadataType() string {
-	if o == nil || IsNil(o.MetadataType) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MetadataType
+
+	return o.MetadataType
 }
 
-// GetMetadataTypeOk returns a tuple with the MetadataType field value if set, nil otherwise
+// GetMetadataTypeOk returns a tuple with the MetadataType field value
 // and a boolean to check if the value has been set.
 func (o *StateMetadata) GetMetadataTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.MetadataType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetadataType, true
+	return &o.MetadataType, true
 }
 
-// HasMetadataType returns a boolean if a field has been set.
-func (o *StateMetadata) HasMetadataType() bool {
-	if o != nil && !IsNil(o.MetadataType) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadataType gets a reference to the given string and assigns it to the MetadataType field.
+// SetMetadataType sets field value
 func (o *StateMetadata) SetMetadataType(v string) {
-	o.MetadataType = &v
+	o.MetadataType = v
 }
 
 // GetReason returns the Reason field value if set, zero value otherwise.
@@ -184,9 +178,7 @@ func (o StateMetadata) MarshalJSON() ([]byte, error) {
 
 func (o StateMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetadataType) {
-		toSerialize["metadata_type"] = o.MetadataType
-	}
+	toSerialize["metadata_type"] = o.MetadataType
 	if !IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
@@ -205,6 +197,27 @@ func (o StateMetadata) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *StateMetadata) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metadata_type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varStateMetadata := _StateMetadata{}
 
 	err = json.Unmarshal(data, &varStateMetadata)
