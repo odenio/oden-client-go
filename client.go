@@ -72,6 +72,8 @@ type APIClient struct {
 
 	ScrapYieldDataAPI *ScrapYieldDataAPIService
 
+	StatesAPI *StatesAPIService
+
 	TargetsAPI *TargetsAPIService
 }
 
@@ -102,6 +104,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ProductsAPI = (*ProductsAPIService)(&c.common)
 	c.QualityTestAPI = (*QualityTestAPIService)(&c.common)
 	c.ScrapYieldDataAPI = (*ScrapYieldDataAPIService)(&c.common)
+	c.StatesAPI = (*StatesAPIService)(&c.common)
 	c.TargetsAPI = (*TargetsAPIService)(&c.common)
 
 	return c
