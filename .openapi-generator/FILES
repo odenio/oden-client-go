@@ -1,4 +1,5 @@
 .gitignore
+.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -54,6 +55,7 @@ docs/MetricGroup.md
 docs/MetricGroupsAPI.md
 docs/OQLAPI.md
 docs/OQLQuery.md
+docs/ParameterError.md
 docs/Product.md
 docs/ProductAttribute.md
 docs/ProductAttributesAPI.md
@@ -121,6 +123,7 @@ model_maintenance_work_order.go
 model_match.go
 model_metric_group.go
 model_oql_query.go
+model_parameter_error.go
 model_product.go
 model_product_attribute.go
 model_product_mapping.go
@@ -148,4 +151,17 @@ model_state_reason_set.go
 model_target.go
 model_unit.go
 response.go
+test/api_dashboards_test.go
+test/api_intervals_test.go
+test/api_machine_groups_test.go
+test/api_maintenance_work_orders_test.go
+test/api_metric_groups_test.go
+test/api_oql_test.go
+test/api_product_attributes_test.go
+test/api_product_mappings_test.go
+test/api_products_test.go
+test/api_quality_test__test.go
+test/api_scrap_yield_data_test.go
+test/api_states_test.go
+test/api_targets_test.go
 utils.go

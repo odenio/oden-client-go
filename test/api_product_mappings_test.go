@@ -22,11 +22,11 @@ func Test_oden_ProductMappingsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ProductMappingsAPIService V2ProductMappingSearchPost", func(t *testing.T) {
+	t.Run("Test ProductMappingsAPIService SearchProductMappings", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ProductMappingsAPI.V2ProductMappingSearchPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ProductMappingsAPI.SearchProductMappings(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,11 +34,11 @@ func Test_oden_ProductMappingsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ProductMappingsAPIService V2ProductMappingSetPost", func(t *testing.T) {
+	t.Run("Test ProductMappingsAPIService SetProductMapping", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ProductMappingsAPI.V2ProductMappingSetPost(context.Background()).Execute()
+		httpRes, err := apiClient.ProductMappingsAPI.SetProductMapping(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

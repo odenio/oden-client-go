@@ -22,22 +22,22 @@ func Test_oden_ProductsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ProductsAPIService V2ProductDeletePost", func(t *testing.T) {
+	t.Run("Test ProductsAPIService DeleteProduct", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ProductsAPI.V2ProductDeletePost(context.Background()).Execute()
+		httpRes, err := apiClient.ProductsAPI.DeleteProduct(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ProductsAPIService V2ProductSearchPost", func(t *testing.T) {
+	t.Run("Test ProductsAPIService SearchProducts", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ProductsAPI.V2ProductSearchPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ProductsAPI.SearchProducts(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -45,11 +45,11 @@ func Test_oden_ProductsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ProductsAPIService V2ProductSetPost", func(t *testing.T) {
+	t.Run("Test ProductsAPIService SetProduct", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ProductsAPI.V2ProductSetPost(context.Background()).Execute()
+		httpRes, err := apiClient.ProductsAPI.SetProduct(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

@@ -22,33 +22,33 @@ func Test_oden_ScrapYieldDataAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ScrapYieldDataAPIService V2ScrapYieldDeletePost", func(t *testing.T) {
+	t.Run("Test ScrapYieldDataAPIService DeleteScrapYield", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ScrapYieldDataAPI.V2ScrapYieldDeletePost(context.Background()).Execute()
+		httpRes, err := apiClient.ScrapYieldDataAPI.DeleteScrapYield(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ScrapYieldDataAPIService V2ScrapYieldSearchPost", func(t *testing.T) {
+	t.Run("Test ScrapYieldDataAPIService SearchScrapYield", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ScrapYieldDataAPI.V2ScrapYieldSearchPost(context.Background()).Execute()
+		httpRes, err := apiClient.ScrapYieldDataAPI.SearchScrapYield(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ScrapYieldDataAPIService V2ScrapYieldSetPost", func(t *testing.T) {
+	t.Run("Test ScrapYieldDataAPIService SetScrapYield", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ScrapYieldDataAPI.V2ScrapYieldSetPost(context.Background()).Execute()
+		httpRes, err := apiClient.ScrapYieldDataAPI.SetScrapYield(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

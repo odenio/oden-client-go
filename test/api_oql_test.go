@@ -22,11 +22,11 @@ func Test_oden_OQLAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test OQLAPIService V2OqlQueryPost", func(t *testing.T) {
+	t.Run("Test OQLAPIService RunOqlQuery", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.OQLAPI.V2OqlQueryPost(context.Background()).Execute()
+		httpRes, err := apiClient.OQLAPI.RunOqlQuery(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

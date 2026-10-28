@@ -22,11 +22,11 @@ func Test_oden_MaintenanceWorkOrdersAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test MaintenanceWorkOrdersAPIService V2MaintenanceWorkOrderDeletePost", func(t *testing.T) {
+	t.Run("Test MaintenanceWorkOrdersAPIService DeleteMaintenanceWorkOrder", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderDeletePost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.MaintenanceWorkOrdersAPI.DeleteMaintenanceWorkOrder(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,11 +34,11 @@ func Test_oden_MaintenanceWorkOrdersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test MaintenanceWorkOrdersAPIService V2MaintenanceWorkOrderSearchPost", func(t *testing.T) {
+	t.Run("Test MaintenanceWorkOrdersAPIService SearchMaintenanceWorkOrders", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderSearchPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.MaintenanceWorkOrdersAPI.SearchMaintenanceWorkOrders(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -46,11 +46,11 @@ func Test_oden_MaintenanceWorkOrdersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test MaintenanceWorkOrdersAPIService V2MaintenanceWorkOrderSetPost", func(t *testing.T) {
+	t.Run("Test MaintenanceWorkOrdersAPIService SetMaintenanceWorkOrder", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.MaintenanceWorkOrdersAPI.V2MaintenanceWorkOrderSetPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.MaintenanceWorkOrdersAPI.SetMaintenanceWorkOrder(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

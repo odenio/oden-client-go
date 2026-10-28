@@ -22,55 +22,55 @@ func Test_oden_QualityTestAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test QualityTestAPIService V2QualitySchemaSearchPost", func(t *testing.T) {
+	t.Run("Test QualityTestAPIService BulkDeleteQualityTests", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.QualityTestAPI.V2QualitySchemaSearchPost(context.Background()).Execute()
+		httpRes, err := apiClient.QualityTestAPI.BulkDeleteQualityTests(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test QualityTestAPIService V2QualityTestDeletePost", func(t *testing.T) {
+	t.Run("Test QualityTestAPIService DeleteQualityTest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.QualityTestAPI.V2QualityTestDeletePost(context.Background()).Execute()
+		httpRes, err := apiClient.QualityTestAPI.DeleteQualityTest(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test QualityTestAPIService V2QualityTestSearchPost", func(t *testing.T) {
+	t.Run("Test QualityTestAPIService SearchQualitySchemas", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.QualityTestAPI.V2QualityTestSearchPost(context.Background()).Execute()
+		httpRes, err := apiClient.QualityTestAPI.SearchQualitySchemas(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test QualityTestAPIService V2QualityTestSetPost", func(t *testing.T) {
+	t.Run("Test QualityTestAPIService SearchQualityTests", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.QualityTestAPI.V2QualityTestSetPost(context.Background()).Execute()
+		httpRes, err := apiClient.QualityTestAPI.SearchQualityTests(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test QualityTestAPIService V2QualityTestsDeletePost", func(t *testing.T) {
+	t.Run("Test QualityTestAPIService SetQualityTest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.QualityTestAPI.V2QualityTestsDeletePost(context.Background()).Execute()
+		httpRes, err := apiClient.QualityTestAPI.SetQualityTest(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

@@ -13,99 +13,115 @@ package oden
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
-// checks if the V2IntervalsUpdatePost200ResponseFailedIntervalsInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &V2IntervalsUpdatePost200ResponseFailedIntervalsInner{}
+// checks if the ParameterError type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ParameterError{}
 
-// V2IntervalsUpdatePost200ResponseFailedIntervalsInner struct for V2IntervalsUpdatePost200ResponseFailedIntervalsInner
-type V2IntervalsUpdatePost200ResponseFailedIntervalsInner struct {
-	Id *string `json:"id,omitempty"`
-	Error *string `json:"error,omitempty"`
+// ParameterError struct for ParameterError
+type ParameterError struct {
+	Error string `json:"error"`
+	Name string `json:"name"`
+	Retryable bool `json:"retryable"`
 }
 
-// NewV2IntervalsUpdatePost200ResponseFailedIntervalsInner instantiates a new V2IntervalsUpdatePost200ResponseFailedIntervalsInner object
+type _ParameterError ParameterError
+
+// NewParameterError instantiates a new ParameterError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2IntervalsUpdatePost200ResponseFailedIntervalsInner() *V2IntervalsUpdatePost200ResponseFailedIntervalsInner {
-	this := V2IntervalsUpdatePost200ResponseFailedIntervalsInner{}
+func NewParameterError(error_ string, name string, retryable bool) *ParameterError {
+	this := ParameterError{}
+	this.Error = error_
+	this.Name = name
+	this.Retryable = retryable
 	return &this
 }
 
-// NewV2IntervalsUpdatePost200ResponseFailedIntervalsInnerWithDefaults instantiates a new V2IntervalsUpdatePost200ResponseFailedIntervalsInner object
+// NewParameterErrorWithDefaults instantiates a new ParameterError object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV2IntervalsUpdatePost200ResponseFailedIntervalsInnerWithDefaults() *V2IntervalsUpdatePost200ResponseFailedIntervalsInner {
-	this := V2IntervalsUpdatePost200ResponseFailedIntervalsInner{}
+func NewParameterErrorWithDefaults() *ParameterError {
+	this := ParameterError{}
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetId() string {
-	if o == nil || IsNil(o.Id) {
+// GetError returns the Error field value
+func (o *ParameterError) GetError() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Error
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetErrorOk returns a tuple with the Error field value
 // and a boolean to check if the value has been set.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+func (o *ParameterError) GetErrorOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Error, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
+// SetError sets field value
+func (o *ParameterError) SetError(v string) {
+	o.Error = v
 }
 
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) SetId(v string) {
-	o.Id = &v
-}
-
-// GetError returns the Error field value if set, zero value otherwise.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetError() string {
-	if o == nil || IsNil(o.Error) {
+// GetName returns the Name field value
+func (o *ParameterError) GetName() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Error
+
+	return o.Name
 }
 
-// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) GetErrorOk() (*string, bool) {
-	if o == nil || IsNil(o.Error) {
+func (o *ParameterError) GetNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Error, true
+	return &o.Name, true
 }
 
-// HasError returns a boolean if a field has been set.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) HasError() bool {
-	if o != nil && !IsNil(o.Error) {
-		return true
+// SetName sets field value
+func (o *ParameterError) SetName(v string) {
+	o.Name = v
+}
+
+// GetRetryable returns the Retryable field value
+func (o *ParameterError) GetRetryable() bool {
+	if o == nil {
+		var ret bool
+		return ret
 	}
 
-	return false
+	return o.Retryable
 }
 
-// SetError gets a reference to the given string and assigns it to the Error field.
-func (o *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) SetError(v string) {
-	o.Error = &v
+// GetRetryableOk returns a tuple with the Retryable field value
+// and a boolean to check if the value has been set.
+func (o *ParameterError) GetRetryableOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Retryable, true
 }
 
-func (o V2IntervalsUpdatePost200ResponseFailedIntervalsInner) MarshalJSON() ([]byte, error) {
+// SetRetryable sets field value
+func (o *ParameterError) SetRetryable(v bool) {
+	o.Retryable = v
+}
+
+func (o ParameterError) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -113,49 +129,85 @@ func (o V2IntervalsUpdatePost200ResponseFailedIntervalsInner) MarshalJSON() ([]b
 	return json.Marshal(toSerialize)
 }
 
-func (o V2IntervalsUpdatePost200ResponseFailedIntervalsInner) ToMap() (map[string]interface{}, error) {
+func (o ParameterError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Error) {
-		toSerialize["error"] = o.Error
-	}
+	toSerialize["error"] = o.Error
+	toSerialize["name"] = o.Name
+	toSerialize["retryable"] = o.Retryable
 	return toSerialize, nil
 }
 
-type NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner struct {
-	value *V2IntervalsUpdatePost200ResponseFailedIntervalsInner
+func (o *ParameterError) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"error",
+		"name",
+		"retryable",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varParameterError := _ParameterError{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varParameterError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ParameterError(varParameterError)
+
+	return err
+}
+
+type NullableParameterError struct {
+	value *ParameterError
 	isSet bool
 }
 
-func (v NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) Get() *V2IntervalsUpdatePost200ResponseFailedIntervalsInner {
+func (v NullableParameterError) Get() *ParameterError {
 	return v.value
 }
 
-func (v *NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) Set(val *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) {
+func (v *NullableParameterError) Set(val *ParameterError) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) IsSet() bool {
+func (v NullableParameterError) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) Unset() {
+func (v *NullableParameterError) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner(val *V2IntervalsUpdatePost200ResponseFailedIntervalsInner) *NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner {
-	return &NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner{value: val, isSet: true}
+func NewNullableParameterError(val *ParameterError) *NullableParameterError {
+	return &NullableParameterError{value: val, isSet: true}
 }
 
-func (v NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) MarshalJSON() ([]byte, error) {
+func (v NullableParameterError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV2IntervalsUpdatePost200ResponseFailedIntervalsInner) UnmarshalJSON(src []byte) error {
+func (v *NullableParameterError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

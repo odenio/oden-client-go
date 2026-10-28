@@ -22,11 +22,11 @@ func Test_oden_TargetsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test TargetsAPIService V2TargetSearchPost", func(t *testing.T) {
+	t.Run("Test TargetsAPIService SearchTargets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.TargetsAPI.V2TargetSearchPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.TargetsAPI.SearchTargets(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,11 +34,11 @@ func Test_oden_TargetsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test TargetsAPIService V2TargetSetPost", func(t *testing.T) {
+	t.Run("Test TargetsAPIService SetTarget", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.TargetsAPI.V2TargetSetPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.TargetsAPI.SetTarget(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

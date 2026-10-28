@@ -13,168 +13,61 @@ package oden
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
-// checks if the SearchLines400Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SearchLines400Response{}
 
 // SearchLines400Response struct for SearchLines400Response
 type SearchLines400Response struct {
-	Error string `json:"error"`
-	Name string `json:"name"`
-	Retryable bool `json:"retryable"`
+	GenericError *GenericError
+	ParameterError *ParameterError
 }
 
-type _SearchLines400Response SearchLines400Response
-
-// NewSearchLines400Response instantiates a new SearchLines400Response object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewSearchLines400Response(error_ string, name string, retryable bool) *SearchLines400Response {
-	this := SearchLines400Response{}
-	this.Error = error_
-	this.Name = name
-	this.Retryable = retryable
-	return &this
-}
-
-// NewSearchLines400ResponseWithDefaults instantiates a new SearchLines400Response object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewSearchLines400ResponseWithDefaults() *SearchLines400Response {
-	this := SearchLines400Response{}
-	return &this
-}
-
-// GetError returns the Error field value
-func (o *SearchLines400Response) GetError() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *SearchLines400Response) GetErrorOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *SearchLines400Response) SetError(v string) {
-	o.Error = v
-}
-
-// GetName returns the Name field value
-func (o *SearchLines400Response) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *SearchLines400Response) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *SearchLines400Response) SetName(v string) {
-	o.Name = v
-}
-
-// GetRetryable returns the Retryable field value
-func (o *SearchLines400Response) GetRetryable() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Retryable
-}
-
-// GetRetryableOk returns a tuple with the Retryable field value
-// and a boolean to check if the value has been set.
-func (o *SearchLines400Response) GetRetryableOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Retryable, true
-}
-
-// SetRetryable sets field value
-func (o *SearchLines400Response) SetRetryable(v bool) {
-	o.Retryable = v
-}
-
-func (o SearchLines400Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o SearchLines400Response) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["error"] = o.Error
-	toSerialize["name"] = o.Name
-	toSerialize["retryable"] = o.Retryable
-	return toSerialize, nil
-}
-
-func (o *SearchLines400Response) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"error",
-		"name",
-		"retryable",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *SearchLines400Response) UnmarshalJSON(data []byte) error {
+	var err error
+	// try to unmarshal JSON data into GenericError
+	err = json.Unmarshal(data, &dst.GenericError);
+	if err == nil {
+		jsonGenericError, _ := json.Marshal(dst.GenericError)
+		if string(jsonGenericError) == "{}" { // empty struct
+			dst.GenericError = nil
+		} else {
+			return nil // data stored in dst.GenericError, return on the first match
 		}
+	} else {
+		dst.GenericError = nil
 	}
 
-	varSearchLines400Response := _SearchLines400Response{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSearchLines400Response)
-
-	if err != nil {
-		return err
+	// try to unmarshal JSON data into ParameterError
+	err = json.Unmarshal(data, &dst.ParameterError);
+	if err == nil {
+		jsonParameterError, _ := json.Marshal(dst.ParameterError)
+		if string(jsonParameterError) == "{}" { // empty struct
+			dst.ParameterError = nil
+		} else {
+			return nil // data stored in dst.ParameterError, return on the first match
+		}
+	} else {
+		dst.ParameterError = nil
 	}
 
-	*o = SearchLines400Response(varSearchLines400Response)
-
-	return err
+	return fmt.Errorf("data failed to match schemas in anyOf(SearchLines400Response)")
 }
+
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src SearchLines400Response) MarshalJSON() ([]byte, error) {
+	if src.GenericError != nil {
+		return json.Marshal(&src.GenericError)
+	}
+
+	if src.ParameterError != nil {
+		return json.Marshal(&src.ParameterError)
+	}
+
+	return nil, nil // no data in anyOf schemas
+}
+
 
 type NullableSearchLines400Response struct {
 	value *SearchLines400Response

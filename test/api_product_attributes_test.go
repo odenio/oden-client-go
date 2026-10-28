@@ -22,11 +22,11 @@ func Test_oden_ProductAttributesAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ProductAttributesAPIService V2ProductAttributeSearchPost", func(t *testing.T) {
+	t.Run("Test ProductAttributesAPIService SearchProductAttributes", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ProductAttributesAPI.V2ProductAttributeSearchPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ProductAttributesAPI.SearchProductAttributes(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,11 +34,11 @@ func Test_oden_ProductAttributesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ProductAttributesAPIService V2ProductAttributeSetPost", func(t *testing.T) {
+	t.Run("Test ProductAttributesAPIService SetProductAttribute", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ProductAttributesAPI.V2ProductAttributeSetPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ProductAttributesAPI.SetProductAttribute(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

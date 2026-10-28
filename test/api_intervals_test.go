@@ -22,11 +22,11 @@ func Test_oden_IntervalsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test IntervalsAPIService V2IntervalDeletePost", func(t *testing.T) {
+	t.Run("Test IntervalsAPIService BulkDeleteIntervals", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.IntervalsAPI.V2IntervalDeletePost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.IntervalsAPI.BulkDeleteIntervals(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,11 +34,11 @@ func Test_oden_IntervalsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntervalsAPIService V2IntervalSearchPost", func(t *testing.T) {
+	t.Run("Test IntervalsAPIService BulkSetIntervals", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.IntervalsAPI.V2IntervalSearchPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.IntervalsAPI.BulkSetIntervals(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -46,11 +46,11 @@ func Test_oden_IntervalsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntervalsAPIService V2IntervalSetPost", func(t *testing.T) {
+	t.Run("Test IntervalsAPIService BulkUpdateIntervals", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.IntervalsAPI.V2IntervalSetPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.IntervalsAPI.BulkUpdateIntervals(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -58,11 +58,11 @@ func Test_oden_IntervalsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntervalsAPIService V2IntervalTypeSearchPost", func(t *testing.T) {
+	t.Run("Test IntervalsAPIService DeleteInterval", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.IntervalsAPI.V2IntervalTypeSearchPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.IntervalsAPI.DeleteInterval(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -70,11 +70,11 @@ func Test_oden_IntervalsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntervalsAPIService V2IntervalUpdatePost", func(t *testing.T) {
+	t.Run("Test IntervalsAPIService DeleteIntervalType", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.IntervalsAPI.V2IntervalUpdatePost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.IntervalsAPI.DeleteIntervalType(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -82,11 +82,11 @@ func Test_oden_IntervalsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntervalsAPIService V2IntervalsDeletePost", func(t *testing.T) {
+	t.Run("Test IntervalsAPIService SearchIntervalTypes", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.IntervalsAPI.V2IntervalsDeletePost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.IntervalsAPI.SearchIntervalTypes(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -94,11 +94,11 @@ func Test_oden_IntervalsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntervalsAPIService V2IntervalsSetPost", func(t *testing.T) {
+	t.Run("Test IntervalsAPIService SearchIntervals", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.IntervalsAPI.V2IntervalsSetPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.IntervalsAPI.SearchIntervals(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -106,11 +106,35 @@ func Test_oden_IntervalsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntervalsAPIService V2IntervalsUpdatePost", func(t *testing.T) {
+	t.Run("Test IntervalsAPIService SetInterval", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.IntervalsAPI.V2IntervalsUpdatePost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.IntervalsAPI.SetInterval(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IntervalsAPIService SetIntervalType", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.IntervalsAPI.SetIntervalType(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IntervalsAPIService UpdateInterval", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.IntervalsAPI.UpdateInterval(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

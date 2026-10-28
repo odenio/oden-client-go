@@ -22,11 +22,11 @@ func Test_oden_MetricGroupsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test MetricGroupsAPIService V2MetricGroupSearchPost", func(t *testing.T) {
+	t.Run("Test MetricGroupsAPIService SearchMetricGroups", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.MetricGroupsAPI.V2MetricGroupSearchPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.MetricGroupsAPI.SearchMetricGroups(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
