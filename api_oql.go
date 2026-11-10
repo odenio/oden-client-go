@@ -50,6 +50,12 @@ RunOqlQuery Run an OQL query
 
 Run an OQL (Oden Query Language) query.
 
+A 400 means the query itself is wrong: it does not parse, uses an
+unknown macro or column, has invalid settings, or exceeds the complexity
+budget. The `error` field says why; fix the query rather than retrying
+it. A 403 means the caller may not query the lines it touches, and a 412
+means the data the query needs is not available yet.
+
 For reference on writing OQL queries, see:
 
 [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql)
@@ -195,6 +201,17 @@ func (a *OQLAPIService) RunOqlQueryExecute(r ApiRunOqlQueryRequest) (*http.Respo
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
 			var v SearchLines409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 412 {
+			var v GenericError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
